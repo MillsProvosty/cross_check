@@ -35,7 +35,7 @@ class StatTracker
 
   def self.create_game_teams_objects(game_teams_file)
     game_teams = []
-    CSV.foreach(game_team_file, headers: true, header_converters:  :symbol) do |row|
+    CSV.foreach(game_teams_file, headers: true, header_converters:  :symbol) do |row|
       game_teams << GameTeam.new(row)
     end
     return games_teams
