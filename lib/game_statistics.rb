@@ -1,12 +1,17 @@
 module GameStatistics
 
   def total_score
-    games.map do |game|
+    @games.map do |game|
       game.away_goals + game.home_goals
     end
   end
 
-  def gs_highest_total_score(games)
+  def highest_total_score
     total_score.max
   end
+
+  def lowest_total_score
+    total_score.min
+  end
+
 end
