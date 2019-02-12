@@ -2,8 +2,10 @@ require 'csv'
 require './lib/game'
 require './lib/game_team'
 require './lib/team'
+require './lib/game_statistics'
 
 class StatTracker
+  include GameStatistics
   attr_reader :games,
               :teams,
               :game_teams
@@ -43,5 +45,9 @@ class StatTracker
       game_teams << GameTeam.new(row)
     end
     return game_teams
+  end
+  
+  def highest_total_score
+    gs_highest_total_score(@games)
   end
 end
