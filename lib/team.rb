@@ -1,9 +1,9 @@
 class Team
-  attr_reader :team_id
-              :franchiseid
-              :shortname
-              :teamname
-              :abbreviation
+  attr_reader :team_id,
+              :franchiseid,
+              :shortname,
+              :teamname,
+              :abbreviation,
               :link
 
   def initialize(row)
