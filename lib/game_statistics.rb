@@ -20,4 +20,7 @@ module GameStatistics
     end
   end
 
+  def biggest_blowout
+    score_margins.max
+  end
 end
