@@ -1,5 +1,6 @@
 require './test/test_helper'
 require './lib/stat_tracker'
+require 'pry'
 
 class StatTrackerTest < Minitest::Test
 
@@ -54,4 +55,19 @@ class StatTrackerTest < Minitest::Test
     assert_equal "Devils", @teams.first.teamname
   end
 
+  def test_from_csv_works
+    game_path = './data/game_dummy.csv'
+    team_path = './data/team_info.csv'
+    game_teams_path = './data/game_teams_stats_dummy.csv'
+    locations = {
+      games: game_path,
+      teams: team_path,
+      game_teams: game_teams_path
+    }
+    stat_tracker = StatTracker.from_csv(locations)
+
+    assert_equal 1, stat_tracker.games.length
+    assert_equal 10, stat_tracker.game_teams.length
+    assert_equal 33, stat_tracker.teams.length
+  end
 end
