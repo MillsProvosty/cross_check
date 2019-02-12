@@ -4,6 +4,10 @@ require './lib/game_team'
 require './lib/team'
 
 class StatTracker
+  attr_reader :games,
+              :teams,
+              :game_teams
+
   def initialize(games, teams, game_teams)
     @games = games
     @teams = teams
@@ -38,6 +42,6 @@ class StatTracker
     CSV.foreach(game_teams_file, headers: true, header_converters:  :symbol) do |row|
       game_teams << GameTeam.new(row)
     end
-    return games_teams
+    return game_teams
   end
 end
