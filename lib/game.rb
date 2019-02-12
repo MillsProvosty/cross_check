@@ -9,6 +9,7 @@ class Game
               :home_goals,
               :outcome,
               :home_rink_side_start
+              
   def initialize(row)
     @game_id = row[:game_id]
     @season = row[:season]
