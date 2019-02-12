@@ -14,4 +14,10 @@ module GameStatistics
     total_score.min
   end
 
+  def score_margins
+    @games.map do |game|
+      (game.away_goals - game.home_goals).abs
+    end
+  end
+
 end
