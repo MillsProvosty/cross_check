@@ -42,6 +42,14 @@ module GameStatistics
     (home_wins / total_games.to_f).round(2) * 100
   end
 
+  def average_goals_per_game
+    (total_score_sum / total_games.to_f).round(2)
+  end
+
+  def total_score_sum
+    total_score.sum
+  end
+  
   def visitor_wins
     visitor_wins = 0
     @games.each do |game|
