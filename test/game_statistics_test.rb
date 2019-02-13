@@ -41,4 +41,16 @@ class GameStatisticsTest < Minitest::Test
     assert_equal 3, @stat_tracker.biggest_blowout
   end
 
+  def test_home_wins
+    assert_equal 4, @stat_tracker.home_wins
+  end
+
+  def test_total_games
+    assert_equal 10, @stat_tracker.total_games
+  end
+
+  def test_percentage_home_wins
+    assert_equal 40.00, @stat_tracker.percentage_home_wins
+  end
+
 end
