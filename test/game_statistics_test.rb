@@ -53,4 +53,13 @@ class GameStatisticsTest < Minitest::Test
     assert_equal 40.00, @stat_tracker.percentage_home_wins
   end
 
+  def test_average_goals_by_season
+    expected = { 20122013 => 4.8,
+                 20152016 => 4.0,
+                 20142015 => 3.0, 
+                 20172018 => 6.0 }
+
+    assert_equal expected, @stat_tracker.average_goals_by_season
+  end
+
 end
