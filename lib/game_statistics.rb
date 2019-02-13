@@ -42,6 +42,18 @@ module GameStatistics
     (home_wins / total_games.to_f).round(2) * 100
   end
 
+  def game_by_season
+    season_hash = {}
+    @games.each do |game|
+      if season_hash[game.season].nil?
+        season_hash[game.season] = 1
+      else
+        season_hash[game.season] += 1
+      end 
+    end
+    return season_hash
+  end
+  
   def average_goals_by_season
     season_hash = games_and_goals_by_season
     result = {}
