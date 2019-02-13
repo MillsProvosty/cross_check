@@ -23,7 +23,7 @@ class LeagueStatisticsTest < Minitest::Test
     assert_equal 33, @stat_tracker.count_of_teams
   end
 
-  def test_total_number_of_goals_by_team
+  def test_total_goals_by_team
     expected = {1 => 1,
                 3 => 5,
                 5 => 3,
