@@ -53,6 +53,10 @@ class GameStatisticsTest < Minitest::Test
     assert_equal 40.00, @stat_tracker.percentage_home_wins
   end
 
+  def test_total_score_sum
+    assert_equal 45, @stat_tracker.total_score_sum
+  end
+
   def test_average_goals_per_game
     assert_equal 4.50, @stat_tracker.average_goals_per_game
   end
