@@ -19,4 +19,7 @@ class LeagueStatisticsTest < Minitest::Test
 
   end
 
+  def test_count_of_teams
+    assert_equal 33, @stat_tracker.count_of_teams
+  end
 end
