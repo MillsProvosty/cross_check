@@ -49,5 +49,18 @@ module GameStatistics
   def total_score_sum
     total_score.sum
   end
+  
+  def visitor_wins
+    visitor_wins = 0
+    @games.each do |game|
+      if game.outcome.include?("away win")
+        visitor_wins += 1
+      end
+    end
+    return visitor_wins
+  end
 
+  def percentage_visitor_wins
+    (visitor_wins / total_games.to_f).round(2) * 100
+  end
 end
