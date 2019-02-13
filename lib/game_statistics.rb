@@ -42,5 +42,8 @@ module GameStatistics
     (home_wins / total_games.to_f).round(2) * 100
   end
 
+  def average_goals_per_game
+    (total_score.sum / total_games.to_f).round(2)
+  end
 
 end
