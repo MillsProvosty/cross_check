@@ -42,8 +42,22 @@ class LeagueStatisticsTest < Minitest::Test
     assert_equal expected, @stat_tracker.total_goals_by_team
   end
 
-  # Step 1: Create hash
-  # Step 2: Each game has Away Goals & Home Goals
-  # Step 3:
+  def test_games_played_by_team
+    expected = {1 => 1,
+                3 => 3,
+                5 => 1,
+                6 => 3,
+                7 => 1,
+                12 => 1,
+                15 => 1,
+                16 => 1,
+                19 => 1,
+                22 => 1,
+                23 => 1,
+                27 => 1,
+                28 => 2,
+                30 => 2}
+    assert_equal expected, @stat_tracker.games_played_by_team
+  end
 
 end
