@@ -21,4 +21,21 @@ module LeagueStatistics
     return total_goals
   end
 
+  def games_played_by_team
+    total_games = {}
+    @games.each do |game|
+      if total_games[game.away_team_id].nil?
+        total_games[game.away_team_id] = 1
+      else
+        total_games[game.away_team_id] += 1
+      end
+      if total_games[game.home_team_id].nil?
+        total_games[game.home_team_id] = 1
+      else
+        total_games[game.home_team_id] += 1
+      end
+    end
+    return total_games
+  end
+
 end
