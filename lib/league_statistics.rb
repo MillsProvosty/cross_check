@@ -38,4 +38,14 @@ module LeagueStatistics
     return total_games
   end
 
+  def average_goals_by_team
+    average_goals = {}
+    total_goals = total_goals_by_team
+    total_games = games_played_by_team
+    total_goals.each do |team_id, goals|
+      average_goals[team_id] = (goals.to_f / total_games[team_id]).round(2)
+    end
+    return average_goals
+  end
+
 end
