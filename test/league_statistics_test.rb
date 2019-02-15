@@ -6,7 +6,6 @@ class LeagueStatisticsTest < Minitest::Test
   include LeagueStatistics
 
   def setup
-
     game_path = './data/game_dummy.csv'
     team_path = './data/team_info.csv'
     game_teams_path = './data/game_teams_stats_dummy.csv'
@@ -16,7 +15,6 @@ class LeagueStatisticsTest < Minitest::Test
       game_teams: game_teams_path
     }
     @stat_tracker = StatTracker.from_csv(locations)
-
   end
 
   def test_count_of_teams
@@ -57,24 +55,26 @@ class LeagueStatisticsTest < Minitest::Test
                 27 => 1,
                 28 => 2,
                 30 => 2}
+
     assert_equal expected, @stat_tracker.games_played_by_team
   end
 
   def test_average_goals_by_team
-    expected = {1 => 1.0,
-                3 => 1.67,
-                5 => 3.0,
-                6 => 3.33,
-                7 => 2.0,
-                12 => 1.0,
-                15 => 3.0,
-                16 => 2.0,
-                19 => 4.0,
-                22 => 1.0,
-                23 => 4.0,
-                27 => 3.0,
-                28 => 1.5,
-                30 => 1.5}
+    expected = { 1 => 1.0,
+                 3 => 1.67,
+                 5 => 3.0,
+                 6 => 3.33,
+                 7 => 2.0,
+                 12 => 1.0,
+                 15 => 3.0,
+                 16 => 2.0,
+                 19 => 4.0,
+                 22 => 1.0,
+                 23 => 4.0,
+                 27 => 3.0,
+                 28 => 1.5,
+                 30 => 1.5 }
+
     assert_equal expected, @stat_tracker.average_goals_by_team
   end
 
