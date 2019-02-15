@@ -79,45 +79,55 @@ class LeagueStatisticsTest < Minitest::Test
   end
 
   def test_best_offense
+    skip
     # Note this is team_id 19, avg_goals = 4.0.
     # Currently the dummy data has a tie for max, team_id 23 (Canucks) are also 4.0
     assert_equal "Blues", @stat_tracker.best_offense
   end
 
   def test_worst_offense
+    skip
     # Again, there is a tie for lowest average goals for dummy data at 1.0
     assert_equal "Devils", @stat_tracker.worst_offense
   end
 
   def test_best_defense
+    skip
     assert_equal "Insert_Team_Name", @stat_tracker.best_defense
   end
 
   def test_highest_scoring_visitor
+    skip
     assert_equal "Insert_Team_Name", @stat_tracker.highest_scoring_visitor
   end
 
   def test_highest_scoring_home_team
+    skip
     assert_equal "Insert_Team_Name", @stat_tracker.highest_scoring_home_team
   end
 
   def test_lowest_scoring_visitor
+    skip
     assert_equal "Insert_Team_Name", @stat_tracker.lowest_scoring_visitor
   end
 
   def test_lowest_scoring_home_team
+    skip
     assert_equal "Insert_Team_Name", @stat_tracker.lowest_scoring_home_team
   end
 
   def test_winningest_team
+    skip
     assert_equal "Insert_Team_Name", @stat_tracker.winningest_team
   end
 
   def test_best_fans
+    skip
     assert_equal "Insert_Team_Name", @stat_tracker.best_fans
   end
 
   def test_worst_fans
+    skip
     assert_equal "Insert_Team_Name", @stat_tracker.worst_fans
   end
 
