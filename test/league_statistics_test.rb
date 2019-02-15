@@ -117,4 +117,8 @@ class LeagueStatisticsTest < Minitest::Test
     assert_equal "Insert_Team_Name", @stat_tracker.best_fans
   end
 
+  def test_worst_fans
+    assert_equal "Insert_Team_Name", @stat_tracker.worst_fans
+  end
+
 end
