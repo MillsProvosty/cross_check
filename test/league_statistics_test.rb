@@ -6,7 +6,6 @@ class LeagueStatisticsTest < Minitest::Test
   include LeagueStatistics
 
   def setup
-
     game_path = './data/game_dummy.csv'
     team_path = './data/team_info.csv'
     game_teams_path = './data/game_teams_stats_dummy.csv'
@@ -16,7 +15,6 @@ class LeagueStatisticsTest < Minitest::Test
       game_teams: game_teams_path
     }
     @stat_tracker = StatTracker.from_csv(locations)
-
   end
 
   def test_count_of_teams
@@ -57,25 +55,80 @@ class LeagueStatisticsTest < Minitest::Test
                 27 => 1,
                 28 => 2,
                 30 => 2}
+
     assert_equal expected, @stat_tracker.games_played_by_team
   end
 
   def test_average_goals_by_team
-    expected = {1 => 1.0,
-                3 => 1.67,
-                5 => 3.0,
-                6 => 3.33,
-                7 => 2.0,
-                12 => 1.0,
-                15 => 3.0,
-                16 => 2.0,
-                19 => 4.0,
-                22 => 1.0,
-                23 => 4.0,
-                27 => 3.0,
-                28 => 1.5,
-                30 => 1.5}
+    expected = { 1 => 1.0,
+                 3 => 1.67,
+                 5 => 3.0,
+                 6 => 3.33,
+                 7 => 2.0,
+                 12 => 1.0,
+                 15 => 3.0,
+                 16 => 2.0,
+                 19 => 4.0,
+                 22 => 1.0,
+                 23 => 4.0,
+                 27 => 3.0,
+                 28 => 1.5,
+                 30 => 1.5 }
+
     assert_equal expected, @stat_tracker.average_goals_by_team
+  end
+
+  def test_best_offense
+    skip
+    # Note this is team_id 19, avg_goals = 4.0.
+    # Currently the dummy data has a tie for max, team_id 23 (Canucks) are also 4.0
+    assert_equal "Blues", @stat_tracker.best_offense
+  end
+
+  def test_worst_offense
+    skip
+    # Again, there is a tie for lowest average goals for dummy data at 1.0
+    assert_equal "Devils", @stat_tracker.worst_offense
+  end
+
+  def test_best_defense
+    skip
+    assert_equal "Insert_Team_Name", @stat_tracker.best_defense
+  end
+
+  def test_highest_scoring_visitor
+    skip
+    assert_equal "Insert_Team_Name", @stat_tracker.highest_scoring_visitor
+  end
+
+  def test_highest_scoring_home_team
+    skip
+    assert_equal "Insert_Team_Name", @stat_tracker.highest_scoring_home_team
+  end
+
+  def test_lowest_scoring_visitor
+    skip
+    assert_equal "Insert_Team_Name", @stat_tracker.lowest_scoring_visitor
+  end
+
+  def test_lowest_scoring_home_team
+    skip
+    assert_equal "Insert_Team_Name", @stat_tracker.lowest_scoring_home_team
+  end
+
+  def test_winningest_team
+    skip
+    assert_equal "Insert_Team_Name", @stat_tracker.winningest_team
+  end
+
+  def test_best_fans
+    skip
+    assert_equal "Insert_Team_Name", @stat_tracker.best_fans
+  end
+
+  def test_worst_fans
+    skip
+    assert_equal "Insert_Team_Name", @stat_tracker.worst_fans
   end
 
 end
