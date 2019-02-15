@@ -89,4 +89,8 @@ class LeagueStatisticsTest < Minitest::Test
     assert_equal "Devils", @stat_tracker.worst_offense
   end
 
+  def test_best_defense
+    assert_equal "Insert_Team_Name", @stat_tracker.best_defense
+  end
+
 end
