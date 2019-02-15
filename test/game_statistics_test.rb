@@ -53,18 +53,18 @@ class GameStatisticsTest < Minitest::Test
     assert_equal 40.00, @stat_tracker.percentage_home_wins
   end
 
-  def test_game_by_season
+  def test_count_of_games_by_season
     expected = {20122013 => 5,
                 20142015 => 1,
                 20152016 => 3,
                 20172018 => 1}
-    
-    assert_equal expected, @stat_tracker.game_by_season
+
+    assert_equal expected, @stat_tracker.count_of_games_by_season
   end
-  
+
   def test_games_and_goals_by_season
     expected = { 20122013 => { :games=>5,
-                               :goals=>24 }, 
+                               :goals=>24 },
                  20152016 => { :games=>3,
                                :goals=>12 },
                  20142015 => { :games=>1,
@@ -83,15 +83,15 @@ class GameStatisticsTest < Minitest::Test
 
     assert_equal expected, @stat_tracker.average_goals_by_season
   end
-  
+
   def test_total_score_sum
     assert_equal 45, @stat_tracker.total_score_sum
   end
 
   def test_average_goals_per_game
     assert_equal 4.50, @stat_tracker.average_goals_per_game
-  end 
-  
+  end
+
   def test_visitor_wins
     assert_equal 6, @stat_tracker.visitor_wins
   end
