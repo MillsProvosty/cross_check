@@ -84,4 +84,9 @@ class LeagueStatisticsTest < Minitest::Test
     assert_equal "Blues", @stat_tracker.best_offense
   end
 
+  def test_worst_offense
+    # Again, there is a tie for lowest average goals for dummy data at 1.0
+    assert_equal "Devils", @stat_tracker.worst_offense
+  end
+
 end
