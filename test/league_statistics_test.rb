@@ -78,4 +78,10 @@ class LeagueStatisticsTest < Minitest::Test
     assert_equal expected, @stat_tracker.average_goals_by_team
   end
 
+  def test_best_offense
+    # Note this is team_id 19, avg_goals = 4.0.
+    # Currently the dummy data has a tie for max, team_id 23 (Canucks) are also 4.0
+    assert_equal "Blues", @stat_tracker.best_offense
+  end
+
 end
