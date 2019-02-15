@@ -109,4 +109,8 @@ class LeagueStatisticsTest < Minitest::Test
     assert_equal "Insert_Team_Name", @stat_tracker.lowest_scoring_home_team
   end
 
+  def test_winningest_team
+    assert_equal "Insert_Team_Name", @stat_tracker.winningest_team    
+  end
+
 end
