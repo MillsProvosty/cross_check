@@ -9,3 +9,5 @@
 "2014020706","20142015","R",2015-01-28,"30","22",2,1,"away win REG","left","Rexall Place","/api/v1/venues/null","America/Edmonton",-6,"MDT"
 "2017020104","20172018","R",2017-10-20,"23","7",4,2,"away win REG","left","KeyBank Center","/api/v1/venues/null","America/New_York",-4,"EDT"
 "2015030416","20152016","P",2016-06-13,"5","28",3,1,"away win REG","left","SAP Center at San Jose","/api/v1/venues/null","America/Los_Angeles",-7,"PDT"
+"2012030185","20122013","P",2013-05-09,"26","19",3,2,"away win OT","left","Scottrade Center","/api/v1/venues/null","America/Chicago",-5,"CDT"
+"2017030111","20172018","P",2018-04-12,"1","14",2,5,"home win REG","left","Amalie Arena","/api/v1/venues/null","America/New_York",-4,"EDT"
