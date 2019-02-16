@@ -61,20 +61,22 @@ class LeagueStatisticsTest < Minitest::Test
 
   def test_average_goals_by_team
     expected = {
-                  1=>1.0,
                   3=>1.67,
-                  5=>3.0,
                   6=>3.33,
-                  7=>2.0,
+                  27=>3.0,
+                  16=>2.0,
                   12=>1.0,
                   15=>3.0,
-                  16=>2.0,
-                  19=>4.0,
+                  28=>1.5,
+                  1=>1.5,
+                  30=>1.5,
+                  19=>3.0,
                   22=>1.0,
                   23=>4.0,
-                  27=>3.0,
-                  28=>1.5,
-                  30=>1.5
+                  7=>2.0,
+                  5=>3.0,
+                  26=>3.0,
+                  14=>5.0
                 }
 
     assert_equal expected, @stat_tracker.average_goals_by_team
