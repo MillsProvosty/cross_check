@@ -17,8 +17,7 @@ class TeamTest < Minitest::Test
   end
 
   def test_best_season
-    expected = 20122013
-
-    assert_equal expected, @stat_tracker.best_season(3)
+    assert_equal 20122013, @stat_tracker.best_season(3)
+    assert_equal 20142015, @stat_tracker.best_season(30)
   end
 end
