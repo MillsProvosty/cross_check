@@ -20,7 +20,7 @@ class GameStatisticsTest < Minitest::Test
   end
 
   def test_the_total_score
-    assert_equal 10, @stat_tracker.total_score.length
+    assert_equal 12, @stat_tracker.total_score.length
   end
 
   def test_highest_total_score
