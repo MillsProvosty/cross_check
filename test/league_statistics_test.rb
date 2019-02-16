@@ -40,7 +40,7 @@ class LeagueStatisticsTest < Minitest::Test
                   26=>3,
                   14=>5
                 }
-                
+
     assert_equal expected, @stat_tracker.total_goals_by_team
   end
 
@@ -109,8 +109,7 @@ class LeagueStatisticsTest < Minitest::Test
   end
 
   def test_highest_scoring_visitor
-    skip
-    assert_equal "Insert_Team_Name", @stat_tracker.highest_scoring_visitor
+    assert_equal "Canucks", @stat_tracker.highest_scoring_visitor
   end
 
   def test_highest_scoring_home_team
