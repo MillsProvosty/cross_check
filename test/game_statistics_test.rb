@@ -42,7 +42,7 @@ class GameStatisticsTest < Minitest::Test
   end
 
   def test_home_wins
-    assert_equal 4, @stat_tracker.home_wins
+    assert_equal 5, @stat_tracker.home_wins
   end
 
   def test_total_games
@@ -93,7 +93,7 @@ class GameStatisticsTest < Minitest::Test
   end
 
   def test_visitor_wins
-    assert_equal 6, @stat_tracker.visitor_wins
+    assert_equal 7, @stat_tracker.visitor_wins
   end
 
   def test_percentage_visitor_wins
