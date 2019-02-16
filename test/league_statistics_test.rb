@@ -41,20 +41,24 @@ class LeagueStatisticsTest < Minitest::Test
   end
 
   def test_games_played_by_team
-    expected = {1 => 1,
-                3 => 3,
-                5 => 1,
-                6 => 3,
-                7 => 1,
-                12 => 1,
-                15 => 1,
-                16 => 1,
-                19 => 1,
-                22 => 1,
-                23 => 1,
-                27 => 1,
-                28 => 2,
-                30 => 2}
+    expected = {
+                  3=>3,
+                  6=>3,
+                  27=>1,
+                  16=>1,
+                  12=>1,
+                  15=>1,
+                  28=>2,
+                  1=>2,
+                  30=>2,
+                  19=>2,
+                  22=>1,
+                  23=>1,
+                  7=>1,
+                  5=>1,
+                  26=>1,
+                  14=>1
+                }
 
     assert_equal expected, @stat_tracker.games_played_by_team
   end
