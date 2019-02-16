@@ -4,10 +4,12 @@ require './lib/game_team'
 require './lib/team'
 require './lib/game_statistics'
 require './lib/league_statistics'
+require './lib/team_statistics'
 
 class StatTracker
   include GameStatistics
   include LeagueStatistics
+  include TeamStatistics
 
   attr_reader :games,
               :teams,
