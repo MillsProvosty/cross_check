@@ -46,7 +46,7 @@ class GameStatisticsTest < Minitest::Test
   end
 
   def test_total_games
-    assert_equal 10, @stat_tracker.total_games
+    assert_equal 12, @stat_tracker.total_games
   end
 
   def test_percentage_home_wins
@@ -56,7 +56,7 @@ class GameStatisticsTest < Minitest::Test
   def test_count_of_games_by_season
     expected = {
                 20122013=>6,
-                20152016=>3, 
+                20152016=>3,
                 20142015=>1,
                 20172018=>2
               }
