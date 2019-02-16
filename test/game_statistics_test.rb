@@ -32,7 +32,7 @@ class GameStatisticsTest < Minitest::Test
   end
 
   def test_difference_between_winner_and_loser
-    expected = [1, 3, 1, 1, 2, 1, 3, 1, 2, 2]
+    expected = [1, 3, 1, 1, 2, 1, 3, 1, 2, 2, 1, 3]
 
     assert_equal expected, @stat_tracker.score_margins
   end
