@@ -87,7 +87,7 @@ class GameStatisticsTest < Minitest::Test
   end
 
   def test_total_score_sum
-    assert_equal 45, @stat_tracker.total_score_sum
+    assert_equal 57, @stat_tracker.total_score_sum
   end
 
   def test_average_goals_per_game
