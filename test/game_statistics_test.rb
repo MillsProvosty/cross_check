@@ -91,7 +91,7 @@ class GameStatisticsTest < Minitest::Test
   end
 
   def test_average_goals_per_game
-    assert_equal 4.50, @stat_tracker.average_goals_per_game
+    assert_equal 4.75, @stat_tracker.average_goals_per_game
   end
 
   def test_visitor_wins
