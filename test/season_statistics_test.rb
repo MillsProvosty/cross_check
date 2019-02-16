@@ -16,4 +16,9 @@ class SeasonStatisticsTest < Minitest::Test
     @stat_tracker = StatTracker.from_csv(locations)
   end
 
+  def test_most_hits
+    assert_equal "Bruins", @stat_tracker.most_hits(20122013)
+    assert_equal "Oilers", @stat_tracker.most_hits(20142015)
+  end
+
 end
