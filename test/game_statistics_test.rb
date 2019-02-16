@@ -65,14 +65,12 @@ class GameStatisticsTest < Minitest::Test
   end
 
   def test_games_and_goals_by_season
-    expected = { 20122013 => { :games=>5,
-                               :goals=>24 },
-                 20152016 => { :games=>3,
-                               :goals=>12 },
-                 20142015 => { :games=>1,
-                               :goals=>3 },
-                 20172018 => { :games=>1,
-                               :goals=>6 } }
+    expected = {
+                20122013=>{:games=>6, :goals=>29},
+                20152016=>{:games=>3, :goals=>12},
+                20142015=>{:games=>1, :goals=>3},
+                20172018=>{:games=>2, :goals=>13}
+              }
 
     assert_equal expected, @stat_tracker.games_and_goals_by_season
   end
