@@ -1,6 +1,7 @@
 module TeamStatistics
 
-  def best_season(team_id)
+
+  def win_percentage_by_season(team_id)
     #select each game by team_id
     games_by_team_id = @games.find_all do |game|
       game.away_team_id == team_id || game.home_team_id == team_id
@@ -31,14 +32,18 @@ module TeamStatistics
     end
 
     #calcuate wins/total_games
-    win_percentage_by_season = {}
+    win_percentage_by_season_hash = {}
     total_wins_by_season.each do |season_id, total_wins|
-      win_percentage_by_season[season_id] = total_wins / total_games_by_season[season_id].to_f
+      win_percentage_by_season_hash[season_id] = total_wins / total_games_by_season[season_id].to_f
     end
+    win_percentage_by_season_hash
+  end
 
-    #.max
-    return win_percentage_by_season.max_by do |season_id, win_percentage|
+  def best_season(team_id)
+    win_percentage_by_season(team_id).max_by do |season_id, win_percentage|
       win_percentage
     end.first
   end
+
+
 end
