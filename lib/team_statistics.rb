@@ -45,5 +45,10 @@ module TeamStatistics
     end.first
   end
 
+  def worst_season(team_id)
+    win_percentage_by_season(team_id).min_by do |season_id, win_percentage|
+      win_percentage
+    end.first
+  end
 
 end
