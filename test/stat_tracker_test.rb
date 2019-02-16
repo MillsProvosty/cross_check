@@ -66,7 +66,7 @@ class StatTrackerTest < Minitest::Test
     }
     stat_tracker = StatTracker.from_csv(locations)
 
-    assert_equal 10, stat_tracker.games.length
+    assert_equal 12, stat_tracker.games.length
     assert_equal 10, stat_tracker.game_teams.length
     assert_equal 33, stat_tracker.teams.length
   end
