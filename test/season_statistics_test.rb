@@ -17,8 +17,7 @@ class SeasonStatisticsTest < Minitest::Test
   end
 
   def test_most_hits
-    assert_equal "Bruins", @stat_tracker.most_hits(20122013)
-    assert_equal "Oilers", @stat_tracker.most_hits(20142015)
+    assert_equal "Rangers", @stat_tracker.most_hits(20122013)
   end
 
 end
