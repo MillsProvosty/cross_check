@@ -99,7 +99,7 @@ class GameStatisticsTest < Minitest::Test
   end
 
   def test_percentage_visitor_wins
-    assert_equal 0.60, @stat_tracker.percentage_visitor_wins
+    assert_equal 0.58, @stat_tracker.percentage_visitor_wins
   end
 
 end

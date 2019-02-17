@@ -100,6 +100,6 @@ module GameStatistics
   end
 
   def percentage_visitor_wins
-    (visitor_wins / total_games.to_f).round(1) * 100
+    (visitor_wins / total_games.to_f).round(2)
   end
 end
