@@ -66,7 +66,7 @@ module GameStatistics
   def games_and_goals_by_season
     season_hash = {}
     @games.each do |game|
-      season = game.season
+      season = game.season.to_s
       game_goals = game.away_goals + game.home_goals
       if season_hash[season].nil?
         season_hash[season] =
