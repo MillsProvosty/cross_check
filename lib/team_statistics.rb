@@ -52,13 +52,32 @@ module TeamStatistics
   end
 
   def most_goals_scored(team_id)
-    #take a team ID and games played
-    total_goals = @games.find do |game|
 
-    #get hash of games played and find goals for each games
+    #select each game by team_id
+    games_by_away_team_id = @games.find_all do |game|
+      game.away_team_id == team_id
+    end
 
-    #iterate over the goals and find the most scored by using max
+    games_by_home_team_id = @games.find_all do |game|
+        game.home_team_id == team_id
+    end
 
+    max_away_goal = games_by_away_team_id.max_by do |game|
+      game.away_goals
+    end
+    max_away_goal = max_away_goal.away_goals
+
+    max_home_goal = games_by_home_team_id.max_by do |game|
+      game.home_goals
+    end
+      max_home_goal = max_home_goal.home_goals
+
+
+      if max_home_goal > max_away_goal
+        return max_home_goal
+      else
+        return max_away_goal
+      end
 
   end
 end
