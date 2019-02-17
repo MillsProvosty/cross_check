@@ -45,10 +45,10 @@ module GameStatistics
   def count_of_games_by_season
     season_hash = {}
     @games.each do |game|
-      if season_hash[game.season].nil?
-        season_hash[game.season] = 1
+      if season_hash[game.season.to_s].nil?
+        season_hash[game.season.to_s] = 1
       else
-        season_hash[game.season] += 1
+        season_hash[game.season.to_s] += 1
       end
     end
     return season_hash
