@@ -25,4 +25,9 @@ class TeamTest < Minitest::Test
     assert_equal 20122013, @stat_tracker.worst_season(3)
     assert_equal 20152016, @stat_tracker.worst_season(30)
   end
+
+  def most_goals_scored
+
+    assert_equal 100, @stat_tracker.most_goals_scored(3)
+  end
 end
