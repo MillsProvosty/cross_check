@@ -11,16 +11,23 @@ module SeasonStatistics
     all_games_with_season_id.each do |game|
       if team_id_with_number_of_hits[game.team_id].nil?
         team_id_with_number_of_hits[game.team_id] = game.hits
+
       else
         team_id_with_number_of_hits[game.team_id] += game.hits
       end
     end
 
   # 3) Find the max
-    team_id_with_max_hits = team_id_with_number_of_hits.max_by do |team_id, hits|
+    max_team_id = team_id_with_number_of_hits.max_by do |team_id, hits|
       hits
     end.first
-binding.pry
+
+    # 4) Convert team_id to teamname
+    team_object =  @teams.find do |team|
+      team.team_id == max_team_id
+    end
+
+    team_object.teamname
   end
 
 end
