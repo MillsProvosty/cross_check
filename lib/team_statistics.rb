@@ -52,8 +52,6 @@ module TeamStatistics
   end
 
   def most_goals_scored(team_id)
-
-    #select each game by team_id
     games_by_away_team_id = @games.find_all do |game|
       game.away_team_id == team_id
     end
@@ -78,6 +76,15 @@ module TeamStatistics
       else
         return max_away_goal
       end
-
   end
+
+  def fewest_goals_scored(team_id)
+    games_by_away_team_id = @games.find_all do |game|
+      game.away_team_id == team_id
+    end
+
+    games_by_home_team_id = @games.find_all do |game|
+        game.home_team_id == team_id
+    end
+
 end
