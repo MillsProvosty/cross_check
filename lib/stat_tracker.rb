@@ -1,11 +1,11 @@
 require 'csv'
-require './lib/game'
-require './lib/game_team'
-require './lib/team'
-require './lib/game_statistics'
-require './lib/league_statistics'
-require './lib/team_statistics'
-require './lib/season_statistics'
+require_relative './game'
+require_relative './game_team'
+require_relative './team'
+require_relative './game_statistics'
+require_relative './league_statistics'
+require_relative './team_statistics'
+require_relative './season_statistics'
 
 class StatTracker
   include GameStatistics
