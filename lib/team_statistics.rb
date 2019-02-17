@@ -70,7 +70,6 @@ module TeamStatistics
     end
       max_home_goal = max_home_goal.home_goals
 
-
       if max_home_goal > max_away_goal
         return max_home_goal
       else
@@ -92,7 +91,16 @@ module TeamStatistics
     end
     min_away_goal = min_away_goal.away_goals
 
+    min_home_goal = games_by_home_team_id.min_by do |game|
+      game.home_goals
+    end
+      min_home_goal = min_home_goal.home_goals
+
+      if min_home_goal < min_away_goal
+        return min_home_goal
+      else
+        return min_away_goal
+      end
 
   end
-
 end
