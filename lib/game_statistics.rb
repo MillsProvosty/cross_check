@@ -58,7 +58,7 @@ module GameStatistics
     season_hash = games_and_goals_by_season
     result = {}
     season_hash.each do |season, values|
-      result[season] = (values[:goals] / values[:games].to_f).round(2)
+      result[season.to_s] = (values[:goals] / values[:games].to_f).round(2)
     end
     result
   end
