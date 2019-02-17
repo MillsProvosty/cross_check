@@ -39,7 +39,7 @@ module GameStatistics
   end
 
   def percentage_home_wins
-    (home_wins / total_games.to_f).round(2) * 100
+    (home_wins / total_games.to_f).round(2)
   end
 
   def count_of_games_by_season
