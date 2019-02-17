@@ -55,10 +55,10 @@ class GameStatisticsTest < Minitest::Test
 
   def test_count_of_games_by_season
     expected = {
-                20122013=>6,
-                20152016=>3,
-                20142015=>1,
-                20172018=>2
+                "20122013"=>6,
+                "20152016"=>3,
+                "20142015"=>1,
+                "20172018"=>2
               }
 
     assert_equal expected, @stat_tracker.count_of_games_by_season
