@@ -51,4 +51,14 @@ module TeamStatistics
     end.first
   end
 
+  def most_goals_scored(team_id)
+    #take a team ID and games played
+    total_goals = @games.find do |game|
+
+    #get hash of games played and find goals for each games
+
+    #iterate over the goals and find the most scored by using max
+
+
+  end
 end
