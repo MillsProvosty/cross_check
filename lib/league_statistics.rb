@@ -4,6 +4,14 @@ module LeagueStatistics
     @teams.count
   end
 
+  def team_id_to_name_converter(team_id)
+    team_object =  @teams.find do |team|
+      team.team_id == team_id
+    end
+
+    team_object.teamname
+  end
+
   def total_goals_by_team
     total_goals = {}
     @games.each do |game|
@@ -82,12 +90,24 @@ module LeagueStatistics
       average_goals
     end.first
 
-    # 5) Convert team_id to teamname
-    team_object =  @teams.find do |team|
-      team.team_id == highest_scoring_team_id
-    end
+    # # 5) Convert team_id to teamname
+    team_id_to_name_converter(highest_scoring_team_id)
+  end
 
-    return team_object.teamname
+  def best_offense
+    best_offense_team_id = average_goals_by_team.max_by do |team_id, average_goals|
+      average_goals
+    end.first
+
+    team_id_to_name_converter(best_offense_team_id)
+  end
+
+  def worst_offense
+    worst_offense_team_id = average_goals_by_team.min_by do |team_id, average_goals|
+      average_goals
+    end.first
+
+    team_id_to_name_converter(worst_offense_team_id)
   end
 
 end

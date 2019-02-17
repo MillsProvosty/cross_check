@@ -91,16 +91,11 @@ class LeagueStatisticsTest < Minitest::Test
   end
 
   def test_best_offense
-    skip
-    # Note this is team_id 19, avg_goals = 4.0.
-    # Currently the dummy data has a tie for max, team_id 23 (Canucks) are also 4.0
-    assert_equal "Blues", @stat_tracker.best_offense
+    assert_equal "Lightning", @stat_tracker.best_offense
   end
 
   def test_worst_offense
-    skip
-    # Again, there is a tie for lowest average goals for dummy data at 1.0
-    assert_equal "Devils", @stat_tracker.worst_offense
+    assert_equal "Hurricanes", @stat_tracker.worst_offense
   end
 
   def test_best_defense
