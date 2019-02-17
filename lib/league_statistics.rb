@@ -90,4 +90,16 @@ module LeagueStatistics
     return team_object.teamname
   end
 
+  def best_offense
+    best_offense_team_id = average_goals_by_team.max_by do |team_id, average_goals|
+      average_goals
+    end.first
+
+    team_object =  @teams.find do |team|
+      team.team_id == best_offense_team_id
+    end
+
+    team_object.teamname
+  end
+
 end
