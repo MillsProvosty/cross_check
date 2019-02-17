@@ -39,16 +39,16 @@ module GameStatistics
   end
 
   def percentage_home_wins
-    (home_wins / total_games.to_f).round(2) * 100
+    (home_wins / total_games.to_f).round(2)
   end
 
   def count_of_games_by_season
     season_hash = {}
     @games.each do |game|
-      if season_hash[game.season].nil?
-        season_hash[game.season] = 1
+      if season_hash[game.season.to_s].nil?
+        season_hash[game.season.to_s] = 1
       else
-        season_hash[game.season] += 1
+        season_hash[game.season.to_s] += 1
       end
     end
     return season_hash
@@ -58,7 +58,7 @@ module GameStatistics
     season_hash = games_and_goals_by_season
     result = {}
     season_hash.each do |season, values|
-      result[season] = (values[:goals] / values[:games].to_f).round(2)
+      result[season.to_s] = (values[:goals] / values[:games].to_f).round(2)
     end
     result
   end
@@ -66,7 +66,7 @@ module GameStatistics
   def games_and_goals_by_season
     season_hash = {}
     @games.each do |game|
-      season = game.season
+      season = game.season.to_s
       game_goals = game.away_goals + game.home_goals
       if season_hash[season].nil?
         season_hash[season] =
@@ -100,6 +100,6 @@ module GameStatistics
   end
 
   def percentage_visitor_wins
-    (visitor_wins / total_games.to_f).round(1) * 100
+    (visitor_wins / total_games.to_f).round(2)
   end
 end
