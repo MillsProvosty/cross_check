@@ -87,4 +87,12 @@ module TeamStatistics
         game.home_team_id == team_id
     end
 
+    min_away_goal = games_by_away_team_id.min_by do |game|
+      game.away_goals
+    end
+    min_away_goal = min_away_goal.away_goals
+
+
+  end
+
 end
