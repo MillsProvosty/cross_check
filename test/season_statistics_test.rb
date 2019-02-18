@@ -24,6 +24,14 @@ class SeasonStatisticsTest < Minitest::Test
     assert_equal 0.23, @stat_tracker.power_play_goal_percentage("20122013")
   end
 
+  def test_most_accurate_team
+    assert_equal "Bruins", @stat_tracker.most_accurate_team(20122013)
+  end
+
+  def test_least_accurate_team
+    assert_equal "Rangers", @stat_tracker.least_accurate_team(20122013)
+  end
+  
   def test_games_grouped_by_coach_name
     games = @stat_tracker.game_teams
     coach_games = @stat_tracker.games_grouped_by_coach_name(games)
