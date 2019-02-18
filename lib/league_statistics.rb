@@ -437,4 +437,37 @@ module LeagueStatistics
     worst_fans_array.map { |team_id| team_id_to_name_converter(team_id) }
   end
 
+  def winningest_team
+    total_wins_by_team_id = {}
+    count_of_games = games_played_by_team
+    win_percentage_by_team_id = {}
+
+    total_games_by_team_id = games.group_by do |game|
+      game.home_team_id  || game.away_team_id
+    end
+
+    total_games_by_team_id.each do |team_id, games|
+      total_wins_by_team_id[team_id] = 0
+
+      games.each do |game|
+        if game.home_team_id == team_id && game.outcome.include?("home win")
+          total_wins_by_team_id[team_id] += 1
+
+        elsif game.away_team_id == team_id &&
+          game.outcome.include?("away win")
+          total_wins_by_team_id[season_id] += 1
+        end
+      end
+
+      wins = total_wins_by_team_id[team_id]
+      games_played = count_of_games[team_id]
+      win_percentage_by_team_id[team_id] = (wins / games_played.to_f).round(2)
+    end
+
+    winningest_team_id = win_percentage_by_team_id.max_by do |team_id, win_percentage|
+      win_percentage
+    end.first
+
+    team_id_to_name_converter(winningest_team_id)
+  end
 end
