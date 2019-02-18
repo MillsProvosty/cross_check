@@ -127,7 +127,6 @@ module LeagueStatistics
       visitor_away_goals = games.sum do |game|
         game.away_goals
       end
-
       visitor_team_id_with_goals_scored[team_id] = visitor_away_goals
     end
 
