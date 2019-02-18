@@ -116,8 +116,17 @@ class LeagueStatisticsTest < Minitest::Test
   end
 
   def test_lowest_scoring_home_team
-    skip
-    assert_equal "Insert_Team_Name", @stat_tracker.lowest_scoring_home_team
+    game_path = './data/gammy_dummy_for_lowest_scoring_home_team.csv'
+    team_path = './data/team_info.csv'
+    game_teams_path = './data/game_teams_stats_dummy.csv'
+    locations = {
+      games: game_path,
+      teams: team_path,
+      game_teams: game_teams_path
+    }
+    stat_tracker = StatTracker.from_csv(locations)
+
+    assert_equal "Devils", stat_tracker.lowest_scoring_home_team
   end
 
   def test_winningest_team
