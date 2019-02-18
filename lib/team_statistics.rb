@@ -51,4 +51,56 @@ module TeamStatistics
     end.first
   end
 
+  def most_goals_scored(team_id)
+    games_by_away_team_id = @games.find_all do |game|
+      game.away_team_id == team_id
+    end
+
+    games_by_home_team_id = @games.find_all do |game|
+        game.home_team_id == team_id
+    end
+
+    max_away_goal = games_by_away_team_id.max_by do |game|
+      game.away_goals
+    end
+    max_away_goal = max_away_goal.away_goals
+
+    max_home_goal = games_by_home_team_id.max_by do |game|
+      game.home_goals
+    end
+      max_home_goal = max_home_goal.home_goals
+
+      if max_home_goal > max_away_goal
+        return max_home_goal
+      else
+        return max_away_goal
+      end
+  end
+
+  def fewest_goals_scored(team_id)
+    games_by_away_team_id = @games.find_all do |game|
+      game.away_team_id == team_id
+    end
+
+    games_by_home_team_id = @games.find_all do |game|
+        game.home_team_id == team_id
+    end
+
+    min_away_goal = games_by_away_team_id.min_by do |game|
+      game.away_goals
+    end
+    min_away_goal = min_away_goal.away_goals
+
+    min_home_goal = games_by_home_team_id.min_by do |game|
+      game.home_goals
+    end
+      min_home_goal = min_home_goal.home_goals
+
+      if min_home_goal < min_away_goal
+        return min_home_goal
+      else
+        return min_away_goal
+      end
+
+  end
 end
