@@ -24,6 +24,19 @@ class SeasonStatisticsTest < Minitest::Test
     assert_equal 0.23, @stat_tracker.power_play_goal_percentage("20122013")
   end
 
+  def test_games_grouped_by_coach_name
+    games = @stat_tracker.game_teams
+    coach_games = @stat_tracker.games_grouped_by_coach_name(games)
+
+    assert_equal ["John Tortorella", "Claude Julien"], coach_games.keys
+    assert_instance_of GameTeam, coach_games["John Tortorella"].first
+  end
+
+  def test_coach_win_percentages
+    skip
+    assert_equal "abc", @stat_tracker.coach_win_percentages
+  end
+
   def test_winningest_coach
     assert_equal "Claude Julien", @stat_tracker.winningest_coach("20122013")
   end
