@@ -109,6 +109,56 @@ module SeasonStatistics
     end
 
     team_object.teamname
+  end 
+  
+  def games_grouped_by_coach_name(games)
+    # Creates hash with key = coach name, value is array of games by coach
+    games.group_by do |game|
+      game.head_coach
+    end
+  end
+
+  def coach_win_percentages(coach_games)
+    # Create hash with key = coach name, value is win_percentage
+    win_percentages = {}
+    coach_games.each do |coach, games|
+      total_games_played = games.length
+      wins = games.count { |game| game.won }
+      win_percentages[coach] = wins / total_games_played.to_f
+    end
+    win_percentages
+  end
+
+  def winningest_coach(season_id)
+    # Find all games with the season id
+    all_games_with_season_id = find_games_by_season_id(season_id)
+
+    # Create hash with key = coach name, value is array of games by coach
+    coach_games = games_grouped_by_coach_name(all_games_with_season_id)
+
+    # Create hash with key = coach name, value is win_percentage
+    win_percentages = coach_win_percentages(coach_games)
+
+    # Find key/value pair with max win percentage
+    win_percentages.max_by do |coach, win_percentage|
+      win_percentage
+    end.first
+  end
+
+  def worst_coach(season_id)
+    # Find all games with the season id
+    all_games_with_season_id = find_games_by_season_id(season_id)
+
+    # Create hash with key = coach name, value is array of games by coach
+    coach_games = games_grouped_by_coach_name(all_games_with_season_id)
+
+    # Create hash with key = coach name, value is win_percentage
+    win_percentages = coach_win_percentages(coach_games)
+    
+    # Find key/value pair with max win percentage
+    win_percentages.min_by do |coach, win_percentage|
+      win_percentage
+    end.first
   end
 
 end

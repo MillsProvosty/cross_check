@@ -31,5 +31,30 @@ class SeasonStatisticsTest < Minitest::Test
   def test_least_accurate_team
     assert_equal "Rangers", @stat_tracker.least_accurate_team(20122013)
   end
+  
+  def test_games_grouped_by_coach_name
+    games = @stat_tracker.game_teams
+    coach_games = @stat_tracker.games_grouped_by_coach_name(games)
+
+    assert_equal ["John Tortorella", "Claude Julien"], coach_games.keys
+    assert_instance_of GameTeam, coach_games["John Tortorella"].first
+  end
+
+  def test_coach_win_percentages
+    games = @stat_tracker.game_teams
+    coach_games = @stat_tracker.games_grouped_by_coach_name(games)
+    expected = { "John Tortorella" => 0.2,
+                 "Claude Julien" => 0.8 }
+
+    assert_equal expected, @stat_tracker.coach_win_percentages(coach_games)
+  end
+
+  def test_winningest_coach
+    assert_equal "Claude Julien", @stat_tracker.winningest_coach("20122013")
+  end
+
+  def test_worst_coach
+    assert_equal "John Tortorella", @stat_tracker.worst_coach("20122013")
+  end
 
 end
