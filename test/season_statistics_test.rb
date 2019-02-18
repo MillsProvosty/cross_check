@@ -24,4 +24,8 @@ class SeasonStatisticsTest < Minitest::Test
     assert_equal 0.23, @stat_tracker.power_play_goal_percentage("20122013")
   end
 
+  def test_winningest_coach
+    assert_equal "Claude Julien", @stat_tracker.winningest_coach("20122013")
+  end
+
 end
