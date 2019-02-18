@@ -182,13 +182,11 @@ class LeagueStatisticsTest < Minitest::Test
   end
 
   def test_best_fans
-    skip
-    assert_equal "Insert_Team_Name", @stat_tracker.best_fans
+    assert_equal "Bruins", @stat_tracker.best_fans
   end
 
   def test_worst_fans
-    skip
-    assert_equal "Insert_Team_Name", @stat_tracker.worst_fans
+    assert_equal ["Sharks"], @stat_tracker.worst_fans
   end
 
   def test_winningest_team

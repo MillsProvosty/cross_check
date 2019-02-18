@@ -266,6 +266,177 @@ module LeagueStatistics
     team_id_to_name_converter(lowest_scoring_team_id)
   end
 
+  def best_fans
+    # Create hash with key = team_id, value = games_played at home
+    home_games_played = {}
+    @games.each do |game|
+      if home_games_played[game.home_team_id].nil?
+        home_games_played[game.home_team_id] = 1
+      else
+        home_games_played[game.home_team_id] += 1
+      end
+    end
+
+    # Create hash with key = team_id, value = wins at home
+    home_games_wins = {}
+    @games.each do |game|
+      if game.outcome.include?("home win")
+        if home_games_wins[game.home_team_id].nil?
+          home_games_wins[game.home_team_id] = 1
+        else
+          home_games_wins[game.home_team_id] += 1
+        end
+      end
+    end
+
+    # Create hash with key = team_id, value = home_win_percentage
+    home_win_percentage = {}
+    home_games_played.each do |team_id, games_played|
+      wins = home_games_wins[team_id]
+      wins = 0 if wins.nil?
+
+      if !games_played.nil?
+        home_win_percentage[team_id] = (wins / games_played.to_f).round(2)
+      end
+    end
+
+    # Create hash with key = team_id, value = games_played at away
+    away_games_played = {}
+    @games.each do |game|
+      if away_games_played[game.away_team_id].nil?
+        away_games_played[game.away_team_id] = 1
+      else
+        away_games_played[game.away_team_id] += 1
+      end
+    end
+
+    # Create hash with key = team_id, value = away wins
+    away_games_wins = {}
+    @games.each do |game|
+      if game.outcome.include?("away win")
+        if away_games_wins[game.away_team_id].nil?
+          away_games_wins[game.away_team_id] = 1
+        else
+          away_games_wins[game.away_team_id] += 1
+        end
+      end
+    end
+
+    # Create hash with key = team_id, value = away_win_percentage
+    away_win_percentage = {}
+    away_games_played.each do |team_id, games_played|
+      wins = away_games_wins[team_id]
+      wins = 0 if wins.nil?
+
+      if !games_played.nil?
+        away_win_percentage[team_id] = (wins / games_played.to_f).round(2)
+      end
+    end
+
+    # Create hash with key = team_id, value = (home - away_win_percentages)
+    win_percentage_difference = {}
+    home_win_percentage.each do |team_id, home_win_percent|
+      away_win_percent = away_win_percentage[team_id]
+
+      if !home_win_percent.nil? && !away_win_percent.nil?
+        win_percentage_difference[team_id] = home_win_percent - away_win_percent
+      end
+    end
+
+    # Find max win_percentage_difference
+    best_fans_team_id = win_percentage_difference.max_by do |team_id, win_percent_difference|
+      win_percent_difference
+    end.first
+
+    team_id_to_name_converter(best_fans_team_id)
+  end
+
+  def worst_fans
+    # List of names of all teams with better away records than home records.
+    # Create hash with key = team_id, value = games_played at home
+    home_games_played = {}
+    @games.each do |game|
+      if home_games_played[game.home_team_id].nil?
+        home_games_played[game.home_team_id] = 1
+      else
+        home_games_played[game.home_team_id] += 1
+      end
+    end
+
+    # Create hash with key = team_id, value = wins at home
+    home_games_wins = {}
+    @games.each do |game|
+      if game.outcome.include?("home win")
+        if home_games_wins[game.home_team_id].nil?
+          home_games_wins[game.home_team_id] = 1
+        else
+          home_games_wins[game.home_team_id] += 1
+        end
+      end
+    end
+
+    # Create hash with key = team_id, value = home_win_percentage
+    home_win_percentage = {}
+    home_games_played.each do |team_id, games_played|
+      wins = home_games_wins[team_id]
+      wins = 0 if wins.nil?
+
+      if !games_played.nil?
+        home_win_percentage[team_id] = (wins / games_played.to_f).round(2)
+      end
+    end
+
+    # Create hash with key = team_id, value = games_played at away
+    away_games_played = {}
+    @games.each do |game|
+      if away_games_played[game.away_team_id].nil?
+        away_games_played[game.away_team_id] = 1
+      else
+        away_games_played[game.away_team_id] += 1
+      end
+    end
+
+    # Create hash with key = team_id, value = away wins
+    away_games_wins = {}
+    @games.each do |game|
+      if game.outcome.include?("away win")
+        if away_games_wins[game.away_team_id].nil?
+          away_games_wins[game.away_team_id] = 1
+        else
+          away_games_wins[game.away_team_id] += 1
+        end
+      end
+    end
+
+    # Create hash with key = team_id, value = away_win_percentage
+    away_win_percentage = {}
+    away_games_played.each do |team_id, games_played|
+      wins = away_games_wins[team_id]
+      wins = 0 if wins.nil?
+
+      if !games_played.nil?
+        away_win_percentage[team_id] = (wins / games_played.to_f).round(2)
+      end
+    end
+
+    # Create hash with key = team_id, value = (home - away_win_percentages)
+    worst_fans_array = []
+    win_percentage_difference = {}
+    home_win_percentage.each do |team_id, home_win_percent|
+      away_win_percent = away_win_percentage[team_id]
+
+      if !home_win_percent.nil? && !away_win_percent.nil?
+        win_percentage_difference[team_id] = home_win_percent - away_win_percent
+      end
+
+      if !win_percentage_difference[team_id].nil? && win_percentage_difference[team_id] < 0
+          worst_fans_array << team_id
+      end
+    end
+
+    worst_fans_array.map { |team_id| team_id_to_name_converter(team_id) }
+  end
+
   def winningest_team
     total_wins_by_team_id = {}
     count_of_games = games_played_by_team
