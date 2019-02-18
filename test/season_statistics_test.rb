@@ -28,4 +28,8 @@ class SeasonStatisticsTest < Minitest::Test
     assert_equal "Bruins", @stat_tracker.most_accurate_team(20122013)
   end
 
+  def test_least_accurate_team
+    assert_equal "Rangers", @stat_tracker.least_accurate_team(20122013)
+  end
+
 end
