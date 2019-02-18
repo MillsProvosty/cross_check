@@ -24,7 +24,7 @@ class StatTrackerTest < Minitest::Test
     assert_equal "left", @games.first.home_rink_side_start
     assert_equal "6", @games.first.home_team_id
     assert_equal "home win OT", @games.first.outcome
-    assert_equal 20122013, @games.first.season
+    assert_equal "20122013", @games.first.season
     assert_equal "P", @games.first.type
   end
 
