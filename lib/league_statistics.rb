@@ -12,6 +12,18 @@ module LeagueStatistics
     team_object.teamname
   end
 
+  def team_info(team_id)
+    team_object = teams.find { |team| team.team_id == team_id }
+    {
+      "team_id" => team_object.team_id,
+      "franchise_id" => team_object.franchiseid,
+      "short_name" => team_object.shortname,
+      "team_name" => team_object.teamname,
+      "abbreviation" => team_object.abbreviation,
+      "link" => team_object.link
+    }
+  end
+
   def total_goals_by_team
     total_goals = {}
     @games.each do |game|

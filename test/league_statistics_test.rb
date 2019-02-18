@@ -17,6 +17,19 @@ class LeagueStatisticsTest < Minitest::Test
     @stat_tracker = StatTracker.from_csv(locations)
   end
 
+  def test_team_info
+    expected = {
+      "team_id" => "18",
+      "franchise_id" => "34",
+      "short_name" => "Nashville",
+      "team_name" => "Predators",
+      "abbreviation" => "NSH",
+      "link" => "/api/v1/teams/18"
+    }
+
+    assert_equal expected, @stat_tracker.team_info("18")
+  end
+
   def test_count_of_teams
     assert_equal 33, @stat_tracker.count_of_teams
   end
