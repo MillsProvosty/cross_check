@@ -165,19 +165,18 @@ module LeagueStatistics
     team_id_to_name_converter(worst_offense_team_id)
   end
 
-  # def average_goals_by_team
-  #   average_goals = {}
-  #   total_goals = total_goals_by_team
-  #   total_games = games_played_by_team
-  #   total_goals.each do |team_id, goals|
-  #     average_goals[team_id] = (goals.to_f / total_games[team_id]).round(2)
-  #   end
-  #   return average_goals
-  # end
-
+  def average_goals_allowed_by_team
+    average_goals = {}
+    total_goals = total_goals_allowed_by_team
+    total_games = games_played_by_team
+    total_goals.each do |team_id, goals|
+      average_goals[team_id] = (goals.to_f / total_games[team_id]).round(2)
+    end
+    return average_goals
+  end
 
   def best_defense
-    best_defense_team_id = average_goals_by_team.max_by do |team_id, average_goals|
+    best_defense_team_id = average_goals_allowed_by_team.min_by do |team_id, average_goals|
       average_goals
     end.first
 
@@ -185,7 +184,7 @@ module LeagueStatistics
   end
 
   def worst_defense
-    worst_defense_team_id = average_goals_by_team.min_by do |team_id, average_goals|
+    worst_defense_team_id = average_goals_allowed_by_team.max_by do |team_id, average_goals|
       average_goals
     end.first
 
