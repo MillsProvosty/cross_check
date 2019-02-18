@@ -8,7 +8,7 @@ class Team
 
   def initialize(row)
     @team_id = row[:team_id]
-    @franchiseid = row[:franchiseid].to_i
+    @franchiseid = row[:franchiseid]
     @shortname = row[:shortname]
     @teamname = row[:teamname]
     @abbreviation = row[:abbreviation]
