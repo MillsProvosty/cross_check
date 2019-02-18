@@ -51,7 +51,7 @@ class StatTrackerTest < Minitest::Test
     assert_equal 23, @teams.first.franchiseid
     assert_equal "/api/v1/teams/1", @teams.first.link
     assert_equal "New Jersey", @teams.first.shortname
-    assert_equal 1, @teams.first.team_id
+    assert_equal "1", @teams.first.team_id
     assert_equal "Devils", @teams.first.teamname
   end
 
