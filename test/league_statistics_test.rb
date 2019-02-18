@@ -44,6 +44,11 @@ class LeagueStatisticsTest < Minitest::Test
     assert_equal expected, @stat_tracker.total_goals_by_team
   end
 
+  def test_total_goals_allowed_by_team
+    expected = {}
+    assert_equal expected, @stat_tracker.total_goals_allowed_by_team
+  end
+
   def test_games_played_by_team
     expected = {
                   3=>3,
