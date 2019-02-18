@@ -82,4 +82,34 @@ module SeasonStatistics
     team_object.teamname
   end
 
+  def least_accurate_team(season_id)
+    all_games_with_season_id = find_games_by_season_id(season_id)
+
+    # Create hash with key = team_id, value = games by team_id
+    games_grouped_by_team_id = all_games_with_season_id.group_by do |game|
+      game.team_id
+    end
+
+    # Create hash with key = team_id, value = ratio (goals / shots)
+    ratio_goals_per_shots = {}
+    games_grouped_by_team_id.each do |team_id, games|
+      goals = games.sum { |game| game.goals }
+      shots = games.sum { |game| game.shots }
+
+      ratio_goals_per_shots[team_id] = goals.to_f / shots
+    end
+
+    # Find team_id with minimum ratio
+    most_accurate_team_id = ratio_goals_per_shots.min_by do |team_id, goals_per_shots|
+      goals_per_shots
+    end.first
+
+    # Convert team_id to team_name
+    team_object =  @teams.find do |team|
+      team.team_id == most_accurate_team_id
+    end
+
+    team_object.teamname
+  end
+
 end
