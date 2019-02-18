@@ -95,7 +95,6 @@ module SeasonStatistics
     games_grouped_by_team_id.each do |team_id, games|
       goals = games.sum { |game| game.goals }
       shots = games.sum { |game| game.shots }
-
       ratio_goals_per_shots[team_id] = goals.to_f / shots
     end
 
