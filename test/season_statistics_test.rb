@@ -33,8 +33,12 @@ class SeasonStatisticsTest < Minitest::Test
   end
 
   def test_coach_win_percentages
-    skip
-    assert_equal "abc", @stat_tracker.coach_win_percentages
+    games = @stat_tracker.game_teams
+    coach_games = @stat_tracker.games_grouped_by_coach_name(games)
+    expected = { "John Tortorella" => 0.2,
+                 "Claude Julien" => 0.8 }
+
+    assert_equal expected, @stat_tracker.coach_win_percentages(coach_games)
   end
 
   def test_winningest_coach
