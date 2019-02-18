@@ -99,8 +99,11 @@ class LeagueStatisticsTest < Minitest::Test
   end
 
   def test_best_defense
-    skip
-    assert_equal "Insert_Team_Name", @stat_tracker.best_defense
+    assert_equal "Lightning", @stat_tracker.best_defense
+  end
+
+  def test_worst_defense
+    assert_equal "Hurricanes", @stat_tracker.worst_offense
   end
 
   def test_highest_scoring_visitor
