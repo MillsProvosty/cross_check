@@ -46,22 +46,22 @@ class LeagueStatisticsTest < Minitest::Test
 
   def test_total_goals_allowed_by_team
     expected = {
-                3=>10,
-                6=>5,
-                27=>2,
-                16=>3,
-                12=>3,
-                15=>1,
-                28=>4,
-                1=>7,
-                30=>5,
-                19=>4,
-                22=>2,
-                23=>2,
-                7=>4,
-                5=>1,
-                26=>2,
-                14=>2
+                "3"=>10,
+                "6"=>5,
+                "27"=>2,
+                "16"=>3,
+                "12"=>3,
+                "15"=>1,
+                "28"=>4,
+                "1"=>7,
+                "30"=>5,
+                "19"=>4,
+                "22"=>2,
+                "23"=>2,
+                "7"=>4,
+                "5"=>1,
+                "26"=>2,
+                "14"=>2
               }
     assert_equal expected, @stat_tracker.total_goals_allowed_by_team
   end
