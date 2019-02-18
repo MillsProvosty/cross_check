@@ -267,7 +267,6 @@ module LeagueStatistics
   end
 
   def winningest_team
-
     total_wins_by_team_id = {}
     count_of_games = games_played_by_team
     win_percentage_by_team_id = {}
@@ -299,6 +298,5 @@ module LeagueStatistics
     end.first
 
     team_id_to_name_converter(winningest_team_id)
-
   end
 end
