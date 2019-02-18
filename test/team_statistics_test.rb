@@ -1,6 +1,7 @@
 require './test/test_helper'
 require './lib/stat_tracker'
 require './lib/game_statistics'
+require './lib/team_statistics'
 
 
 class TeamTest < Minitest::Test
@@ -17,20 +18,25 @@ class TeamTest < Minitest::Test
   end
 
   def test_best_season
-    assert_equal 20122013, @stat_tracker.best_season(3)
-    assert_equal 20142015, @stat_tracker.best_season(30)
+    assert_equal 20122013, @stat_tracker.best_season("3")
+    assert_equal 20142015, @stat_tracker.best_season("30")
   end
 
   def test_worst_season
-    assert_equal 20122013, @stat_tracker.worst_season(3)
-    assert_equal 20152016, @stat_tracker.worst_season(30)
+    assert_equal 20122013, @stat_tracker.worst_season("3")
+    assert_equal 20152016, @stat_tracker.worst_season("30")
+  end
+
+  def test_average_win_percentage
+      # teamName: Wild avg win pct 0.5
+    assert_equal 0.50, @stat_tracker.average_win_percentage("30")
   end
 
   def test_most_goals_scored
-    assert_equal 5, @stat_tracker.most_goals_scored(6)
+    assert_equal 5, @stat_tracker.most_goals_scored("6")
   end
 
   def test_fewest_goals_scored
-    assert_equal 2, @stat_tracker.fewest_goals_scored(6)
+    assert_equal 2, @stat_tracker.fewest_goals_scored("6")
   end
 end

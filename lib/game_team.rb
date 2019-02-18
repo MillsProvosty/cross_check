@@ -17,7 +17,7 @@ class GameTeam
 
   def initialize(row)
     @game_id = row[:game_id].to_i
-    @team_id = row[:team_id].to_i
+    @team_id = row[:team_id]
     @hoa = row[:hoa]
     @won = string_to_boolean(row[:won]) # Converts string to boolean
     @settled_in = row[:settled_in]
