@@ -155,6 +155,14 @@ module LeagueStatistics
 
     team_id_to_name_converter(best_defense_team_id)
   end
+  
+  def worst_defense
+    worst_defense_team_id = average_goals_by_team.min_by do |team_id, average_goals|
+      average_goals
+    end.first
+
+    team_id_to_name_converter(worst_defense_team_id)
+  end
 
   def lowest_scoring_visitor
     visitor_games_by_team_id = @games.group_by do |game|
