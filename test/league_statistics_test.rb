@@ -103,6 +103,10 @@ class LeagueStatisticsTest < Minitest::Test
     assert_equal "Hurricanes", @stat_tracker.worst_offense
   end
 
+  def test_average_goals_allowed_by_team
+    assert_equal 4, @stat_tracker.average_goals_allowed_by_team
+  end
+
   def test_best_defense
     assert_equal "Lightning", @stat_tracker.best_defense
   end
