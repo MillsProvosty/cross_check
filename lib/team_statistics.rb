@@ -51,6 +51,31 @@ module TeamStatistics
     end.first
   end
 
+  def average_win_percentage(team_id)
+    #select each game by team_id
+    games_by_team_id = @games.find_all do |game|
+      game.away_team_id == team_id || game.home_team_id == team_id
+    end
+
+    #calcuate wins/total_games
+    total_games_by_team_id = games_by_team_id.length
+    total_wins_by_team_id = 0
+
+    games_by_team_id.each do |game|
+        if game.home_team_id == team_id && game.outcome.include?("home win")
+          total_wins_by_team_id += 1
+
+        elsif game.away_team_id == team_id &&
+          game.outcome.include?("away win")
+          total_wins_by_team_id += 1
+        end
+      end
+
+    #calcuate wins/total_games
+    (total_wins_by_team_id / total_games_by_team_id.to_f).round(2)
+
+  end
+
   def most_goals_scored(team_id)
     games_by_away_team_id = @games.find_all do |game|
       game.away_team_id == team_id
