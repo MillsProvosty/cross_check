@@ -50,13 +50,13 @@ module SeasonStatistics
       end
 
     # 3) Find the max
-      max_team_id = team_id_with_number_of_hits.min_by do |team_id, hits|
+      min_team_id = team_id_with_number_of_hits.min_by do |team_id, hits|
         hits
       end.first
 
       # 4) Convert team_id to teamname
       team_object =  @teams.find do |team|
-        team.team_id == max_team_id
+        team.team_id == min_team_id
       end
 
       team_object.teamname
