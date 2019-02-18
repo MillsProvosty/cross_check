@@ -20,4 +20,8 @@ class SeasonStatisticsTest < Minitest::Test
     assert_equal "Rangers", @stat_tracker.most_hits(20122013)
   end
 
+  def test_power_play_goal_percentage
+    assert_equal 0.23, @stat_tracker.power_play_goal_percentage("20122013")
+  end
+
 end
