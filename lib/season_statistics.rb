@@ -2,7 +2,7 @@ module SeasonStatistics
 
   def find_games_by_season_id(season_id)
     @game_teams.find_all do |game|
-      game.game_id.to_s[0..3] == season_id.to_s[0..3]
+      game.game_id.to_s[0..3] == season_id[0..3]
     end
   end
 
@@ -137,8 +137,8 @@ module SeasonStatistics
     end
 
     team_object.teamname
-  end 
-  
+  end
+
   def games_grouped_by_coach_name(games)
     # Creates hash with key = coach name, value is array of games by coach
     games.group_by do |game|
@@ -182,7 +182,7 @@ module SeasonStatistics
 
     # Create hash with key = coach name, value is win_percentage
     win_percentages = coach_win_percentages(coach_games)
-    
+
     # Find key/value pair with max win percentage
     win_percentages.min_by do |coach, win_percentage|
       win_percentage

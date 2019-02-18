@@ -17,11 +17,11 @@ class SeasonStatisticsTest < Minitest::Test
   end
 
   def test_most_hits
-    assert_equal "Rangers", @stat_tracker.most_hits(20122013)
+    assert_equal "Rangers", @stat_tracker.most_hits("20122013")
   end
 
   def test_least_hits
-    assert_equal "Bruins", @stat_tracker.least_hits(20122013)
+    assert_equal "Bruins", @stat_tracker.least_hits("20122013")
   end
 
   def test_power_play_goal_percentage
@@ -29,13 +29,13 @@ class SeasonStatisticsTest < Minitest::Test
   end
 
   def test_most_accurate_team
-    assert_equal "Bruins", @stat_tracker.most_accurate_team(20122013)
+    assert_equal "Bruins", @stat_tracker.most_accurate_team("20122013")
   end
 
   def test_least_accurate_team
-    assert_equal "Rangers", @stat_tracker.least_accurate_team(20122013)
+    assert_equal "Rangers", @stat_tracker.least_accurate_team("20122013")
   end
-  
+
   def test_games_grouped_by_coach_name
     games = @stat_tracker.game_teams
     coach_games = @stat_tracker.games_grouped_by_coach_name(games)
