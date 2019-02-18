@@ -44,6 +44,28 @@ class LeagueStatisticsTest < Minitest::Test
     assert_equal expected, @stat_tracker.total_goals_by_team
   end
 
+  def test_total_goals_allowed_by_team
+    expected = {
+                3=>10,
+                6=>5,
+                27=>2,
+                16=>3,
+                12=>3,
+                15=>1,
+                28=>4,
+                1=>7,
+                30=>5,
+                19=>4,
+                22=>2,
+                23=>2,
+                7=>4,
+                5=>1,
+                26=>2,
+                14=>2
+              }
+    assert_equal expected, @stat_tracker.total_goals_allowed_by_team
+  end
+
   def test_games_played_by_team
     expected = {
                   3=>3,
@@ -98,9 +120,34 @@ class LeagueStatisticsTest < Minitest::Test
     assert_equal "Hurricanes", @stat_tracker.worst_offense
   end
 
+  def test_average_goals_allowed_by_team
+    expected = {
+                3=>3.33,
+                6=>1.67,
+                27=>2.0,
+                16=>3.0,
+                12=>3.0,
+                15=>1.0,
+                28=>2.0,
+                1=>3.5,
+                30=>2.5,
+                19=>2.0,
+                22=>2.0,
+                23=>2.0,
+                7=>4.0,
+                5=>1.0,
+                26=>2.0,
+                14=>2.0
+              }
+    assert_equal expected, @stat_tracker.average_goals_allowed_by_team
+  end
+
   def test_best_defense
-    skip
-    assert_equal "Insert_Team_Name", @stat_tracker.best_defense
+    assert_equal "Capitals", @stat_tracker.best_defense
+  end
+
+  def test_worst_defense
+    assert_equal "Hurricanes", @stat_tracker.worst_offense
   end
 
   def test_highest_scoring_visitor

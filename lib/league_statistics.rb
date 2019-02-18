@@ -29,6 +29,23 @@ module LeagueStatistics
     return total_goals
   end
 
+  def total_goals_allowed_by_team
+    total_goals = {}
+    @games.each do |game|
+      if total_goals[game.away_team_id].nil?
+        total_goals[game.away_team_id] = game.home_goals
+      else
+        total_goals[game.away_team_id] += game.home_goals
+      end
+      if total_goals[game.home_team_id].nil?
+        total_goals[game.home_team_id] = game.away_goals
+      else
+        total_goals[game.home_team_id] += game.away_goals
+      end
+    end
+    return total_goals
+  end
+
   def games_played_by_team
     total_games = {}
     @games.each do |game|
@@ -146,6 +163,32 @@ module LeagueStatistics
     end.first
 
     team_id_to_name_converter(worst_offense_team_id)
+  end
+
+  def average_goals_allowed_by_team
+    average_goals = {}
+    total_goals = total_goals_allowed_by_team
+    total_games = games_played_by_team
+    total_goals.each do |team_id, goals|
+      average_goals[team_id] = (goals.to_f / total_games[team_id]).round(2)
+    end
+    return average_goals
+  end
+
+  def best_defense
+    best_defense_team_id = average_goals_allowed_by_team.min_by do |team_id, average_goals|
+      average_goals
+    end.first
+
+    team_id_to_name_converter(best_defense_team_id)
+  end
+
+  def worst_defense
+    worst_defense_team_id = average_goals_allowed_by_team.max_by do |team_id, average_goals|
+      average_goals
+    end.first
+
+    team_id_to_name_converter(worst_defense_team_id)
   end
 
   def lowest_scoring_visitor
