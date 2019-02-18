@@ -110,4 +110,41 @@ module LeagueStatistics
     team_id_to_name_converter(worst_offense_team_id)
   end
 
+  def lowest_scoring_visitor
+    visitor_games_by_team_id = @games.group_by do |game|
+      game.away_team_id
+    end
+
+    # 1) Build hash with visitor team id as key, value = total games played.
+    visitor_team_id_with_games_played = {}
+    visitor_games_by_team_id.each do |team_id, games|
+      visitor_team_id_with_games_played[team_id] = games.length
+    end
+
+    # 2) Build hash with visitor team id as key, value = total visitor goals scored
+    visitor_team_id_with_goals_scored = {}
+    visitor_games_by_team_id.each do |team_id, games|
+      visitor_away_goals = games.sum do |game|
+        game.away_goals
+      end
+      visitor_team_id_with_goals_scored[team_id] = visitor_away_goals
+    end
+
+    # 3) Build hash visitor team id as key, value = average goals scored
+    visitor_team_id_with_average_goals_scored = {}
+    visitor_games_by_team_id.each do |team_id, games|
+      average_goals_scored = visitor_team_id_with_goals_scored[team_id] / visitor_team_id_with_games_played[team_id].to_f
+
+      visitor_team_id_with_average_goals_scored[team_id] = average_goals_scored
+    end
+
+    # 4) Take 3rd hash and call .min on the average goals scored (values)
+    lowest_scoring_team_id  = visitor_team_id_with_average_goals_scored.min_by do |team_id, average_goals|
+      average_goals
+    end.first
+
+    # # 5) Convert team_id to teamname
+    team_id_to_name_converter(lowest_scoring_team_id)
+  end
+
 end
