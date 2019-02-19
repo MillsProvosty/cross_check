@@ -212,7 +212,7 @@ class LeagueStatisticsTest < Minitest::Test
   end
 
   def test_winningest_team
-    assert_equal "Capitals", @stat_tracker.winningest_team
+    assert_equal "Kings", @stat_tracker.winningest_team
   end
 
 end
