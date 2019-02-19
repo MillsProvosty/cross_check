@@ -157,7 +157,7 @@ module TeamStatistics
     # For each game, calculate score difference and assign max
     max_score_difference(games_team_lost)
   end
-  
+
   def favorite_opponent(team_id)
     opponent_win_percentages = find_opponent_win_percentages(team_id)
 
@@ -227,7 +227,7 @@ module TeamStatistics
       end
 
     end
-    
+
     # Build expected hash from data above
     result = {}
     games_grouped_by_season_and_type.each do |season_id, season_type_hash|
@@ -253,7 +253,12 @@ module TeamStatistics
     result
   end
 
-  def find_opponent_win_percentages(team_id)    
+  def find_opponent_win_percentages(team_id)
+    # Find all games by team_id
+    games_by_team_id = @games.find_all do |game|
+      game.away_team_id == team_id || game.home_team_id == team_id
+    end
+    
     # Create hash with key = opponent, value = wins by opponent
     opponent_wins = {}
 
@@ -314,7 +319,7 @@ module TeamStatistics
     end
     opponent_win_percentages
   end
-  
+
   def head_to_head(team_id)
     # Find all games by team_id
     games_by_team_id = @games.find_all do |game|
