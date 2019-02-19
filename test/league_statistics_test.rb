@@ -206,4 +206,8 @@ class LeagueStatisticsTest < Minitest::Test
     assert_equal "Capitals", @stat_tracker.winningest_team
   end
 
+  def test_biggest_team_blowout
+    assert_equal 3, @stat_tracker.biggest_team_blowout("6")
+  end
+
 end
