@@ -160,7 +160,7 @@ class LeagueStatisticsTest < Minitest::Test
   end
 
   def test_worst_defense
-    assert_equal "Sabres", @stat_tracker.worst_defense
+    assert_equal "Coyotes", @stat_tracker.worst_defense
   end
 
   def test_highest_scoring_visitor
