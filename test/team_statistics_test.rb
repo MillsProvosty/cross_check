@@ -40,10 +40,44 @@ class TeamTest < Minitest::Test
     assert_equal 2, @stat_tracker.fewest_goals_scored("6")
   end
 
+
   def test_head_to_head
     expected = { "Devils" => 1.0,
                  "Penguins" => 0.0 }
 
     assert_equal expected, @stat_tracker.head_to_head("28")
   end
+
+  def test_seasonal_summary
+    expected = { "20122013"=>
+                  { :preseason => { :win_percentage=>0.0,
+                                    :average_goals_scored=>1.67,
+                                    :average_goals_against=>3.33,
+                                    :total_goals_scored=>5,
+                                    :total_goals_against=>10},
+                    :regular_season => { :win_percentage=>0,
+                                         :average_goals_scored=>0,
+                                         :average_goals_against=>0,
+                                         :total_goals_scored=>0,
+                                         :total_goals_against=>0}}}
+
+    assert_equal expected, @stat_tracker.seasonal_summary("3")
+  end
+  
+  def test_biggest_team_blowout
+    assert_equal 3, @stat_tracker.biggest_team_blowout("6")
+  end
+
+  def test_worst_loss
+    assert_equal 3, @stat_tracker.worst_loss("3")
+  end
+
+  def test_favorite_opponent
+    assert_equal "Oilers", @stat_tracker.favorite_opponent("30")
+  end
+
+  def test_rival
+    assert_equal "Blues", @stat_tracker.rival("30")
+  end
+  
 end
