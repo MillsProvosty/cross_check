@@ -128,4 +128,74 @@ module TeamStatistics
       end
 
   end
+
+  def head_to_head(team_id)
+    # Find all games by team_id
+    games_by_team_id = @games.find_all do |game|
+      game.away_team_id == team_id || game.home_team_id == team_id
+    end
+
+    # Create hash with key = opponent, value = wins by opponent
+    opponent_wins = {}
+
+    games_by_team_id.each do |game|
+      if team_id == game.away_team_id && game.outcome.include?("home win")
+        opponent_team_id = game.home_team_id
+
+        if opponent_wins[opponent_team_id].nil?
+          opponent_wins[opponent_team_id] = 1
+        else
+          opponent_wins[opponent_team_id] += 1
+        end
+
+      elsif team_id == game.home_team_id && game.outcome.include?("away win")
+        opponent_team_id = game.away_team_id
+
+        if opponent_wins[opponent_team_id].nil?
+          opponent_wins[opponent_team_id] = 1
+        else
+          opponent_wins[opponent_team_id] += 1
+        end
+
+      end
+    end
+
+    # Create hash with key = opponent, value = total games against opponent
+    opponent_games_played_together = {}
+    games_by_team_id.each do |game|
+      if team_id == game.away_team_id
+        opponent_team_id = game.home_team_id
+
+        if opponent_games_played_together[opponent_team_id].nil?
+          opponent_games_played_together[opponent_team_id] = 1
+        else
+          opponent_games_played_together[opponent_team_id] += 1
+        end
+
+      else
+        opponent_team_id = game.away_team_id
+
+        if opponent_games_played_together[opponent_team_id].nil?
+          opponent_games_played_together[opponent_team_id] = 1
+        else
+          opponent_games_played_together[opponent_team_id] += 1
+        end
+      end
+    end
+
+    # Use the above to calculate opponent win percentages against team_id
+    opponent_win_percentages = {}
+    opponent_games_played_together.each do |opponent_team_id, games_played|
+      opponent_team_name = team_id_to_name_converter(opponent_team_id)
+      if opponent_wins[opponent_team_id].nil?
+        opponent_win_percentages[opponent_team_name] = 0.0
+      else
+        win_percent = (1.00 - opponent_wins[opponent_team_id] / games_played.to_f).round(2)
+        opponent_win_percentages[opponent_team_name] = win_percent
+      end
+    end
+
+    opponent_win_percentages
+  end
+
 end
