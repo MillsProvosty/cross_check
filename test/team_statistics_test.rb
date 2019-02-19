@@ -41,7 +41,7 @@ class TeamTest < Minitest::Test
   end
 
   def test_head_to_head
-    expected = { "Devils" => 0.0,
+    expected = { "Devils" => 1.0,
                  "Penguins" => 0.0 }
 
     assert_equal expected, @stat_tracker.head_to_head("28")

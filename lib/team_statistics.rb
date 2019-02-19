@@ -188,7 +188,7 @@ module TeamStatistics
     opponent_games_played_together.each do |opponent_team_id, games_played|
       opponent_team_name = team_id_to_name_converter(opponent_team_id)
       if opponent_wins[opponent_team_id].nil?
-        opponent_win_percentages[opponent_team_name] = 0.0
+        opponent_win_percentages[opponent_team_name] = 1.0
       else
         win_percent = (1.00 - opponent_wins[opponent_team_id] / games_played.to_f).round(2)
         opponent_win_percentages[opponent_team_name] = win_percent
