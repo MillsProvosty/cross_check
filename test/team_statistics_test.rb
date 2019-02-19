@@ -40,6 +40,14 @@ class TeamTest < Minitest::Test
     assert_equal 2, @stat_tracker.fewest_goals_scored("6")
   end
 
+
+  def test_head_to_head
+    expected = { "Devils" => 1.0,
+                 "Penguins" => 0.0 }
+
+    assert_equal expected, @stat_tracker.head_to_head("28")
+  end
+
   def test_seasonal_summary
     expected = { "20122013"=>
                   { :preseason => { :win_percentage=>0.0,

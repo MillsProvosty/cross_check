@@ -72,7 +72,6 @@ module TeamStatistics
 
     #calcuate wins/total_games
     (total_wins_by_team_id / total_games_by_team_id.to_f).round(2)
-
   end
 
   def most_goals_scored(team_id)
@@ -221,7 +220,6 @@ module TeamStatistics
         season_type = :preseason if game.type == "P"
         season_type = :regular_season if game.type == "R"
 
-
         games_grouped_by_season_and_type[season_id][season_type][:wins] += win
         games_grouped_by_season_and_type[season_id][season_type][:total_games] += 1
         games_grouped_by_season_and_type[season_id][season_type][:total_goals_scored] += goals_scored
@@ -255,7 +253,7 @@ module TeamStatistics
     result
   end
 
-  def find_opponent_win_percentages(team_id)
+  def find_opponent_win_percentages(team_id)    
     # Create hash with key = opponent, value = wins by opponent
     opponent_wins = {}
 
@@ -314,6 +312,75 @@ module TeamStatistics
         opponent_win_percentages[opponent_team_name] = win_percent
       end
     end
+    opponent_win_percentages
+  end
+  
+  def head_to_head(team_id)
+    # Find all games by team_id
+    games_by_team_id = @games.find_all do |game|
+      game.away_team_id == team_id || game.home_team_id == team_id
+    end
+
+    # Create hash with key = opponent, value = wins by opponent
+    opponent_wins = {}
+
+    games_by_team_id.each do |game|
+      if team_id == game.away_team_id && game.outcome.include?("home win")
+        opponent_team_id = game.home_team_id
+
+        if opponent_wins[opponent_team_id].nil?
+          opponent_wins[opponent_team_id] = 1
+        else
+          opponent_wins[opponent_team_id] += 1
+        end
+
+      elsif team_id == game.home_team_id && game.outcome.include?("away win")
+        opponent_team_id = game.away_team_id
+
+        if opponent_wins[opponent_team_id].nil?
+          opponent_wins[opponent_team_id] = 1
+        else
+          opponent_wins[opponent_team_id] += 1
+        end
+
+      end
+    end
+
+    # Create hash with key = opponent, value = total games against opponent
+    opponent_games_played_together = {}
+    games_by_team_id.each do |game|
+      if team_id == game.away_team_id
+        opponent_team_id = game.home_team_id
+
+        if opponent_games_played_together[opponent_team_id].nil?
+          opponent_games_played_together[opponent_team_id] = 1
+        else
+          opponent_games_played_together[opponent_team_id] += 1
+        end
+
+      else
+        opponent_team_id = game.away_team_id
+
+        if opponent_games_played_together[opponent_team_id].nil?
+          opponent_games_played_together[opponent_team_id] = 1
+        else
+          opponent_games_played_together[opponent_team_id] += 1
+        end
+      end
+    end
+
+    # Use the above to calculate opponent win percentages against team_id
+    opponent_win_percentages = {}
+    opponent_games_played_together.each do |opponent_team_id, games_played|
+      opponent_team_name = team_id_to_name_converter(opponent_team_id)
+      if opponent_wins[opponent_team_id].nil?
+        opponent_win_percentages[opponent_team_name] = 1.0
+      else
+        win_percent = (1.00 - opponent_wins[opponent_team_id] / games_played.to_f).round(2)
+        opponent_win_percentages[opponent_team_name] = win_percent
+      end
+    end
+
     opponent_win_percentages
   end
 
