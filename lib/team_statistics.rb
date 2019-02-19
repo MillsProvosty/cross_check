@@ -1,6 +1,5 @@
 module TeamStatistics
 
-
   def win_percentage_by_season(team_id)
     #select each game by team_id
     games_by_team_id = @games.find_all do |game|
@@ -129,6 +128,53 @@ module TeamStatistics
 
   end
 
+  def max_score_difference(games)
+    score_diff_max = 1
+    games.each do |game|
+        score_diff = (game.away_goals - game.home_goals).abs
+        if score_diff > score_diff_max
+          score_diff_max = score_diff
+        end
+    end
+    score_diff_max
+  end
+
+  def biggest_team_blowout(team_id)
+    # Select all games that team_id won
+    games_team_won = @games.find_all do |game|
+      team_id == game.away_team_id && game.outcome.include?("away win") ||
+        team_id == game.home_team_id && game.outcome.include?("home win")
+    end
+    # For each game, calculate score difference and assign max
+    max_score_difference(games_team_won)
+  end
+
+  def worst_loss(team_id)
+    # Select all games that team_id lost
+    games_team_lost = @games.find_all do |game|
+      team_id == game.away_team_id && game.outcome.include?("home win") ||
+        team_id == game.home_team_id && game.outcome.include?("away win")
+    end
+    # For each game, calculate score difference and assign max
+    max_score_difference(games_team_lost)
+  end
+  
+  def favorite_opponent(team_id)
+    opponent_win_percentages = find_opponent_win_percentages(team_id)
+
+    opponent_win_percentages.min_by do |opponent_team_name, win_percent|
+      win_percent
+    end.first
+  end
+
+  def rival(team_id)
+    opponent_win_percentages = find_opponent_win_percentages(team_id)
+
+    opponent_win_percentages.max_by do |opponent_team_name, win_percent|
+      win_percent
+    end.first
+  end
+
   def seasonal_summary(team_id)
     # Find all games by team_id
     games_by_team_id = @games.find_all do |game|
@@ -207,6 +253,68 @@ module TeamStatistics
       end
     end
     result
+  end
+
+  def find_opponent_win_percentages(team_id)
+    # Create hash with key = opponent, value = wins by opponent
+    opponent_wins = {}
+
+    games_by_team_id.each do |game|
+      if team_id == game.away_team_id && game.outcome.include?("home win")
+        opponent_team_name = team_id_to_name_converter(game.home_team_id)
+
+        if opponent_wins[opponent_team_name].nil?
+          opponent_wins[opponent_team_name] = 1
+        else
+          opponent_wins[opponent_team_name] += 1
+        end
+
+      elsif team_id == game.home_team_id && game.outcome.include?("away win")
+        opponent_team_name = team_id_to_name_converter(game.away_team_id)
+
+        if opponent_wins[opponent_team_name].nil?
+          opponent_wins[opponent_team_name] = 1
+        else
+          opponent_wins[opponent_team_name] += 1
+        end
+
+      end
+    end
+
+    # Create hash with key = opponent, value = total games against opponent
+    opponent_games_played_together = {}
+    games_by_team_id.each do |game|
+      if team_id == game.away_team_id
+        opponent_team_name = team_id_to_name_converter(game.home_team_id)
+
+        if opponent_games_played_together[opponent_team_name].nil?
+          opponent_games_played_together[opponent_team_name] = 1
+        else
+          opponent_games_played_together[opponent_team_name] += 1
+        end
+
+      else
+        opponent_team_name = team_id_to_name_converter(game.away_team_id)
+
+        if opponent_games_played_together[opponent_team_name].nil?
+          opponent_games_played_together[opponent_team_name] = 1
+        else
+          opponent_games_played_together[opponent_team_name] += 1
+        end
+      end
+    end
+
+    # Use the above to calculate opponent win percentages against team_id
+    opponent_win_percentages = {}
+    opponent_games_played_together.each do |opponent_team_name, games_played|
+      if opponent_wins[opponent_team_name].nil?
+        opponent_win_percentages[opponent_team_name] = 0
+      else
+        win_percent = (opponent_wins[opponent_team_name] / games_played.to_f)
+        opponent_win_percentages[opponent_team_name] = win_percent
+      end
+    end
+    opponent_win_percentages
   end
 
 end
