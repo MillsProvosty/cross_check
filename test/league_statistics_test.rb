@@ -228,7 +228,7 @@ class LeagueStatisticsTest < Minitest::Test
   end
 
   def test_lowest_scoring_visitor
-    assert_equal "Hurricanes", @stat_tracker.lowest_scoring_visitor
+    assert_equal "Coyotes", @stat_tracker.lowest_scoring_visitor
   end
 
   def test_lowest_scoring_home_team
