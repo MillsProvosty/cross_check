@@ -160,7 +160,7 @@ class LeagueStatisticsTest < Minitest::Test
   end
 
   def test_worst_defense
-    assert_equal "Hurricanes", @stat_tracker.worst_offense
+    assert_equal "Sabres", @stat_tracker.worst_defense
   end
 
   def test_highest_scoring_visitor
@@ -187,11 +187,6 @@ class LeagueStatisticsTest < Minitest::Test
     stat_tracker = StatTracker.from_csv(locations)
 
     assert_equal "Devils", stat_tracker.lowest_scoring_home_team
-  end
-
-  def test_winningest_team
-    skip
-    assert_equal "Insert_Team_Name", @stat_tracker.winningest_team
   end
 
   def test_best_fans

@@ -28,7 +28,6 @@ class TeamTest < Minitest::Test
   end
 
   def test_average_win_percentage
-      # teamName: Wild avg win pct 0.5
     assert_equal 0.50, @stat_tracker.average_win_percentage("30")
   end
 
@@ -63,7 +62,7 @@ class TeamTest < Minitest::Test
 
     assert_equal expected, @stat_tracker.seasonal_summary("3")
   end
-  
+
   def test_biggest_team_blowout
     assert_equal 3, @stat_tracker.biggest_team_blowout("6")
   end
@@ -79,5 +78,5 @@ class TeamTest < Minitest::Test
   def test_rival
     assert_equal "Blues", @stat_tracker.rival("30")
   end
-  
+
 end
