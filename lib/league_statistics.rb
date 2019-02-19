@@ -483,35 +483,4 @@ module LeagueStatistics
     team_id_to_name_converter(winningest_team_id)
   end
 
-  def max_score_difference(games)
-    score_diff_max = 1
-    games.each do |game|
-        score_diff = (game.away_goals - game.home_goals).abs
-        if score_diff > score_diff_max
-          score_diff_max = score_diff
-        end
-    end
-    score_diff_max
-  end
-
-  def biggest_team_blowout(team_id)
-    # Select all games that team_id won
-    games_team_won = @games.find_all do |game|
-      team_id == game.away_team_id && game.outcome.include?("away win") ||
-        team_id == game.home_team_id && game.outcome.include?("home win")
-    end
-    # For each game, calculate score difference and assign max
-    max_score_difference(games_team_won)
-  end
-
-  def worst_loss(team_id)
-    # Select all games that team_id lost
-    games_team_lost = @games.find_all do |game|
-      team_id == game.away_team_id && game.outcome.include?("home win") ||
-        team_id == game.home_team_id && game.outcome.include?("away win")
-    end
-    # For each game, calculate score difference and assign max
-    max_score_difference(games_team_lost)
-  end
-
 end
