@@ -39,4 +39,20 @@ class TeamTest < Minitest::Test
   def test_fewest_goals_scored
     assert_equal 2, @stat_tracker.fewest_goals_scored("6")
   end
+
+  def test_seasonal_summary
+    expected = { "20122013"=>
+                  { :preseason => { :win_percentage=>0.0,
+                                    :average_goals_scored=>1.67,
+                                    :average_goals_against=>3.33,
+                                    :total_goals_scored=>5,
+                                    :total_goals_against=>10},
+                    :regular_season => { :win_percentage=>0,
+                                         :average_goals_scored=>0,
+                                         :average_goals_against=>0,
+                                         :total_goals_scored=>0,
+                                         :total_goals_against=>0}}}
+
+    assert_equal expected, @stat_tracker.seasonal_summary("3")
+  end
 end
