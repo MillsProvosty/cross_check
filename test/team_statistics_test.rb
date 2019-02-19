@@ -39,4 +39,13 @@ class TeamTest < Minitest::Test
   def test_fewest_goals_scored
     assert_equal 2, @stat_tracker.fewest_goals_scored("6")
   end
+
+  def test_favorite_opponent
+    assert_equal "Oilers", @stat_tracker.favorite_opponent("30")
+  end
+
+  def test_rival
+    assert_equal "Blues", @stat_tracker.rival("30")
+  end
+
 end

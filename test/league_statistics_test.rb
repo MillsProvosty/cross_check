@@ -206,12 +206,4 @@ class LeagueStatisticsTest < Minitest::Test
     assert_equal "Capitals", @stat_tracker.winningest_team
   end
 
-  def test_favorite_opponent
-    assert_equal "Oilers", @stat_tracker.favorite_opponent("30")
-  end
-
-  def test_rival
-    assert_equal "Blues", @stat_tracker.rival("30")
-  end
-
 end
