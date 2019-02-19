@@ -144,7 +144,7 @@ class LeagueStatisticsTest < Minitest::Test
   end
 
   def test_worst_offense
-    assert_equal "Hurricanes", @stat_tracker.worst_offense
+    assert_equal "Oilers", @stat_tracker.worst_offense
   end
 
   def test_average_goals_allowed_by_team
