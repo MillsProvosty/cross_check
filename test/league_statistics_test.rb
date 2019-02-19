@@ -210,4 +210,8 @@ class LeagueStatisticsTest < Minitest::Test
     assert_equal "Oilers", @stat_tracker.favorite_opponent("30")
   end
 
+  def test_rival
+    assert_equal "Blues", @stat_tracker.rival("30")
+  end
+
 end
