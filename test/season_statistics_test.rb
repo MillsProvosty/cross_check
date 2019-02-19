@@ -66,7 +66,7 @@ class SeasonStatisticsTest < Minitest::Test
   end
 
   def test_biggest_surprise
-    assert_equal "Bruins", @stat_tracker.biggest_bust("20122013")
+    assert_equal "Coyotes", @stat_tracker.biggest_surprise("20122013")
   end
 
 end
