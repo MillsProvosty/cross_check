@@ -164,7 +164,7 @@ class LeagueStatisticsTest < Minitest::Test
   end
 
   def test_highest_scoring_visitor
-    assert_equal "Canucks", @stat_tracker.highest_scoring_visitor
+    assert_equal "Blues", @stat_tracker.highest_scoring_visitor
   end
 
   def test_highest_scoring_home_team
