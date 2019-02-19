@@ -32,6 +32,14 @@ module LeagueStatistics
     end.first
   end
 
+  def rival(team_id)
+    opponent_win_percentages = find_opponent_win_percentages(team_id)
+
+    opponent_win_percentages.max_by do |opponent_team_name, win_percent|
+      win_percent
+    end.first
+  end
+
   def find_opponent_win_percentages(team_id)
     # Find all games by team_id
     games_by_team_id = @games.find_all do |game|
