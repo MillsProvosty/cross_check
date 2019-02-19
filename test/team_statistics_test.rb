@@ -39,4 +39,11 @@ class TeamTest < Minitest::Test
   def test_fewest_goals_scored
     assert_equal 2, @stat_tracker.fewest_goals_scored("6")
   end
+
+  def test_head_to_head
+    expected = { "Devils" => 0.0,
+                 "Penguins" => 0.0 }
+
+    assert_equal expected, @stat_tracker.head_to_head("28")
+  end
 end
