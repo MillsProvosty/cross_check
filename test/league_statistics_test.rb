@@ -208,7 +208,7 @@ class LeagueStatisticsTest < Minitest::Test
   end
 
   def test_worst_fans
-    assert_equal ["Sharks"], @stat_tracker.worst_fans
+    assert_equal ["Lightning", "Red Wings", "Panthers", "Sabres", "Canadiens", "Predators", "Sharks"], @stat_tracker.worst_fans
   end
 
   def test_winningest_team
