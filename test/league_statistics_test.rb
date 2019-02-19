@@ -156,7 +156,7 @@ class LeagueStatisticsTest < Minitest::Test
   end
 
   def test_best_defense
-    assert_equal "Capitals", @stat_tracker.best_defense
+    assert_equal "Senators", @stat_tracker.best_defense
   end
 
   def test_worst_defense
