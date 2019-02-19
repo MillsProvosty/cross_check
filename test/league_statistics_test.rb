@@ -126,7 +126,7 @@ class LeagueStatisticsTest < Minitest::Test
   end
 
   def test_best_offense
-    assert_equal "Lightning", @stat_tracker.best_offense
+    assert_equal "Canucks", @stat_tracker.best_offense
   end
 
   def test_worst_offense
