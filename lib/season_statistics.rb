@@ -189,4 +189,166 @@ module SeasonStatistics
     end.first
   end
 
+  def biggest_bust(season_id)
+    # Find all games from season_id
+    all_games_from_season_id = games.find_all do |game|
+      season_id == game.season
+    end
+
+    # Create hash with key = team_id, value = hash with values
+    #  :preseason_wins, :preseason_total_games, :regular_wins, :regular_total_games
+    team_records = {}
+    all_games_from_season_id.each do |game|
+      away_team_id = game.away_team_id
+      home_team_id = game.home_team_id
+
+      if team_records[away_team_id].nil?
+        team_records[away_team_id] = {
+          preseason_wins: 0,
+          preseason_total_games: 0,
+          regular_wins: 0,
+          regular_total_games: 0
+        }
+      end
+
+      if team_records[home_team_id].nil?
+        team_records[home_team_id] = {
+          preseason_wins: 0,
+          preseason_total_games: 0,
+          regular_wins: 0,
+          regular_total_games: 0
+        }
+      end
+
+      if game.type == "P"
+        team_records[away_team_id][:preseason_total_games] += 1
+        team_records[home_team_id][:preseason_total_games] += 1
+
+        if game.outcome.include?("away win")
+          team_records[away_team_id][:preseason_wins] += 1
+        else
+          team_records[home_team_id][:preseason_wins] += 1
+        end
+
+      else
+        team_records[away_team_id][:regular_total_games] += 1
+        team_records[home_team_id][:regular_total_games] += 1
+
+        if game.outcome.include?("away win")
+          team_records[away_team_id][:regular_wins] += 1
+        else
+          team_records[home_team_id][:regular_wins] += 1
+        end
+      end
+
+    end
+
+    # Create hash with key = team_id, value = pre-win% - reg-win%
+    win_percentages = {}
+    team_records.each do |team_id, team_stats|
+      if team_stats[:preseason_total_games] == 0
+        preseason_win_percentage = 0
+      else
+        preseason_win_percentage = team_stats[:preseason_wins] / team_stats[:preseason_total_games].to_f
+      end
+
+      if team_stats[:regular_total_games] == 0
+        regular_win_percentage = 0
+      else
+        regular_win_percentage = team_stats[:regular_wins] / team_stats[:regular_total_games].to_f
+      end
+
+      win_percentages[team_id] = (preseason_win_percentage - regular_win_percentage).round(2)
+    end
+
+    # Find .max on above
+    team_id_biggest_bust = win_percentages.max_by do |team_id, win_percent|
+      win_percent
+    end.first
+
+    # Convert to team name
+    teams.find { |team| team.team_id == team_id_biggest_bust }.teamname
+  end
+
+  def biggest_surprise(season_id)
+    # Find all games from season_id
+    all_games_from_season_id = games.find_all do |game|
+      season_id == game.season
+    end
+
+    # Create hash with key = team_id, value = hash with values
+    #  :preseason_wins, :preseason_total_games, :regular_wins, :regular_total_games
+    team_records = {}
+    all_games_from_season_id.each do |game|
+      away_team_id = game.away_team_id
+      home_team_id = game.home_team_id
+
+      if team_records[away_team_id].nil?
+        team_records[away_team_id] = {
+          preseason_wins: 0,
+          preseason_total_games: 0,
+          regular_wins: 0,
+          regular_total_games: 0
+        }
+      end
+
+      if team_records[home_team_id].nil?
+        team_records[home_team_id] = {
+          preseason_wins: 0,
+          preseason_total_games: 0,
+          regular_wins: 0,
+          regular_total_games: 0
+        }
+      end
+
+      if game.type == "P"
+        team_records[away_team_id][:preseason_total_games] += 1
+        team_records[home_team_id][:preseason_total_games] += 1
+
+        if game.outcome.include?("away win")
+          team_records[away_team_id][:preseason_wins] += 1
+        else
+          team_records[home_team_id][:preseason_wins] += 1
+        end
+
+      else
+        team_records[away_team_id][:regular_total_games] += 1
+        team_records[home_team_id][:regular_total_games] += 1
+
+        if game.outcome.include?("away win")
+          team_records[away_team_id][:regular_wins] += 1
+        else
+          team_records[home_team_id][:regular_wins] += 1
+        end
+      end
+
+    end
+
+    # Create hash with key = team_id, value = pre-win% - reg-win%
+    win_percentages = {}
+    team_records.each do |team_id, team_stats|
+      if team_stats[:preseason_total_games] == 0
+        preseason_win_percentage = 0
+      else
+        preseason_win_percentage = team_stats[:preseason_wins] / team_stats[:preseason_total_games].to_f
+      end
+
+      if team_stats[:regular_total_games] == 0
+        regular_win_percentage = 0
+      else
+        regular_win_percentage = team_stats[:regular_wins] / team_stats[:regular_total_games].to_f
+      end
+
+      win_percentages[team_id] = (preseason_win_percentage - regular_win_percentage).round(2)
+    end
+
+    # Find .max on above
+    team_id_biggest_surprise = win_percentages.min_by do |team_id, win_percent|
+      win_percent
+    end.first
+
+    # Convert to team name
+    teams.find { |team| team.team_id == team_id_biggest_surprise }.teamname
+  end
+
 end
