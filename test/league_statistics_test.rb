@@ -189,11 +189,6 @@ class LeagueStatisticsTest < Minitest::Test
     assert_equal "Devils", stat_tracker.lowest_scoring_home_team
   end
 
-  def test_winningest_team
-    skip
-    assert_equal "Insert_Team_Name", @stat_tracker.winningest_team
-  end
-
   def test_best_fans
     assert_equal "Bruins", @stat_tracker.best_fans
   end
