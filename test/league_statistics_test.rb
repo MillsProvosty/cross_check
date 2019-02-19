@@ -210,4 +210,8 @@ class LeagueStatisticsTest < Minitest::Test
     assert_equal 3, @stat_tracker.biggest_team_blowout("6")
   end
 
+  def test_worst_loss
+    assert_equal 3, @stat_tracker.worst_loss("3")
+  end
+
 end
