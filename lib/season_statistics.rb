@@ -49,7 +49,7 @@ module SeasonStatistics
         end
       end
 
-    # 3) Find the max
+    # 3) Find the min
       min_team_id = team_id_with_number_of_hits.min_by do |team_id, hits|
         hits
       end.first
